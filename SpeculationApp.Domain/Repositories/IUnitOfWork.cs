@@ -13,5 +13,6 @@ namespace SpeculationApp.Domain.Repositories
         IOperationRepository Operations { get; }
         IOperationTypeRepository OperationTypes { get; }
         IPairRepository Pairs { get; }
+        void Complete();
     }
 }

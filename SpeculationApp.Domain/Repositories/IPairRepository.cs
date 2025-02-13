@@ -9,7 +9,7 @@ namespace SpeculationApp.Domain.Repositories
 {
     public interface IPairRepository
     {
-        IEnumerable<IPair> GetAll();
-        void Update(IPair entity);
+        IEnumerable<Pair> GetAll();
+        void Update(Pair entity);
     }
 }

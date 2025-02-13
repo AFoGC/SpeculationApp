@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Domain.Repositories
 {
-    public interface IConvertationRepository : IRepository<IConvertation>
+    public interface IConvertationRepository : IRepository<Convertation>
     {
-        IEnumerable<IConvertation> GetBaseCurrencyConvertations(int baseCurrencyId);
-        IEnumerable<IConvertation> GetTradeCurrencyConvertations(int tradeCurrencyId);
+        IEnumerable<Convertation> GetBaseCurrencyConvertations(int baseCurrencyId);
+        IEnumerable<Convertation> GetTradeCurrencyConvertations(int tradeCurrencyId);
     }
 }

@@ -15,7 +15,7 @@ namespace SpeculatorApp.Persistance.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ICurrency> GetAll()
+        public IEnumerable<Currency> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace SpeculatorApp.Persistance.Repositories
             throw new NotImplementedException();
         }
 
-        public ICurrency GetByid(int id)
+        public Currency GetByid(int id)
         {
             throw new NotImplementedException();
         }
@@ -40,7 +40,7 @@ namespace SpeculatorApp.Persistance.Repositories
             throw new NotImplementedException();
         }
 
-        public void Update(ICurrency entity)
+        public void Update(Currency entity)
         {
             throw new NotImplementedException();
         }

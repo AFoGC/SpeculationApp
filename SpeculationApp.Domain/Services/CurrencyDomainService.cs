@@ -10,9 +10,9 @@ namespace SpeculationApp.Domain.Services
 {
     public class CurrencyDomainService
     {
-        private readonly ICurrency _currency;
+        private readonly Currency _currency;
 
-        public CurrencyDomainService(ICurrency currency)
+        public CurrencyDomainService(Currency currency)
         {
             _currency = currency;
         }
@@ -64,7 +64,7 @@ namespace SpeculationApp.Domain.Services
             return total;
         }
 
-        private decimal GetCountFromOperations(IEnumerable<IOperation> operations)
+        private decimal GetCountFromOperations(IEnumerable<Operation> operations)
         {
             decimal total = 0;
 

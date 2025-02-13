@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Domain.Repositories
 {
-    public interface IOperationTypeRepository : IRepository<IOperationType>
+    public interface IOperationTypeRepository : IRepository<OperationType>
     {
         
     }

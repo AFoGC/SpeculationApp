@@ -20,27 +20,27 @@ namespace SpeculatorApp.Persistance.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IConvertation> GetAll()
+        public IEnumerable<Convertation> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IConvertation> GetBaseCurrencyConvertations(int baseCurrencyId)
+        public IEnumerable<Convertation> GetBaseCurrencyConvertations(int baseCurrencyId)
         {
             throw new NotImplementedException();
         }
 
-        public IConvertation GetByid(int id)
+        public Convertation GetByid(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IConvertation> GetTradeCurrencyConvertations(int tradeCurrencyId)
+        public IEnumerable<Convertation> GetTradeCurrencyConvertations(int tradeCurrencyId)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IConvertation entity)
+        public void Update(Convertation entity)
         {
             throw new NotImplementedException();
         }

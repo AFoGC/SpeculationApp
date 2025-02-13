@@ -15,17 +15,17 @@ namespace SpeculatorApp.Persistance.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IOperation> GetAll()
+        public IEnumerable<Operation> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IOperation GetByid(int id)
+        public Operation GetByid(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IOperation entity)
+        public void Update(Operation entity)
         {
             throw new NotImplementedException();
         }

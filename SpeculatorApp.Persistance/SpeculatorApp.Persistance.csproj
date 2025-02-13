@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Mappers\" />
-    <Folder Include="Entities\" />
+    <Folder Include="Dto\" />
   </ItemGroup>
 
   <ItemGroup>

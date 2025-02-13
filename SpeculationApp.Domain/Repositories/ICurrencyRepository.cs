@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Domain.Repositories
 {
-    public interface ICurrencyRepository : IRepository<ICurrency>
+    public interface ICurrencyRepository : IRepository<Currency>
     {
         decimal GetBaseCurrencyAmount(int baseCurrencyId);
         decimal GetTradeCurrencyAmount(int tradeCurrencyId);

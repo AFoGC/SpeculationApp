@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace SpeculatorApp.Persistance.Repositories
 {
-    public class OperationTypeRepository : IOperationRepository
+    public class OperationTypeRepository : IOperationTypeRepository
     {
         public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IOperation> GetAll()
+        public IEnumerable<OperationType> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IOperation GetByid(int id)
+        public OperationType GetByid(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IOperation entity)
+        public void Update(OperationType entity)
         {
             throw new NotImplementedException();
         }

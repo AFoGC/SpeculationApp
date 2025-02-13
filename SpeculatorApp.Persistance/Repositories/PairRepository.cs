@@ -10,12 +10,12 @@ namespace SpeculatorApp.Persistance.Repositories
 {
     public class PairRepository : IPairRepository
     {
-        public IEnumerable<IPair> GetAll()
+        public IEnumerable<Pair> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(IPair entity)
+        public void Update(Pair entity)
         {
             throw new NotImplementedException();
         }
