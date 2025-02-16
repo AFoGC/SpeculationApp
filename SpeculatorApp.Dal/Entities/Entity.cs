@@ -17,7 +17,7 @@ namespace SpeculationApp.Dal.Entities
             PropertyChanged?.Invoke(this, e);
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
