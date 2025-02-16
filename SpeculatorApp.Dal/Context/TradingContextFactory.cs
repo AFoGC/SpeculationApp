@@ -1,35 +1,31 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using SpeculationApp.Dal.Context;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace SpeculationApp.Wpf
+namespace SpeculationApp.Dal.Context
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public class TradingContextFactory : IDesignTimeDbContextFactory<TradingContext>
     {
-        public App()
+        public TradingContextFactory()
+        {
+
+        }
+
+        public TradingContext CreateDbContext(string[] args)
         {
             string connectionString = "Datasource=" + "C:\\Users\\sirko\\source\\repos\\SpeculationApp\\SpeculationApp.Wpf\\bin\\Debug\\net7.0-windows\\Films.db";
             SqliteConnection connection = new SqliteConnection(connectionString);
 
             DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
             var opt = optionsBuilder.UseSqlite(connection).Options;
-            TradingContext filmsContext = new TradingContext(opt);
+            TradingContext tradingContext = new TradingContext(opt);
 
-            filmsContext.Database.EnsureCreated();
-            filmsContext.SaveChanges();
+            return tradingContext;
         }
-
-
     }
 }
