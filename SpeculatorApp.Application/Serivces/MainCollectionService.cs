@@ -15,11 +15,13 @@ namespace SpeculatorApp.Application.Serivces
         {
             _unitOfWork = unitOfWork;
 
-            //CurrencyCollection = new CurrencyCollectionService();
-            //PairCollection = new PairCollectionService();
-            //ConvertationCollection = new ConvertationCollectionService();
-            //OperationCollection = new OperationCollectionService();
-            //OperationTypeCollection = new OperationTypeCollectionService();
+            
+
+            CurrencyCollection = new CurrencyCollectionService();
+            PairCollection = new PairCollectionService();
+            ConvertationCollection = new ConvertationCollectionService();
+            OperationCollection = new OperationCollectionService();
+            OperationTypeCollection = new OperationTypeCollectionService();
         }
 
         public CurrencyCollectionService CurrencyCollection { get; }

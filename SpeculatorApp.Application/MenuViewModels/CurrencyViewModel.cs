@@ -1,5 +1,6 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
+using SpeculatorApp.Application.Serivces;
 using SpeculatorApp.Application.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,13 @@ namespace SpeculatorApp.Application.MenuViewModels
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly CurrencyEntity _currency;
+        private readonly CurrencyOperations _operations;
 
-        private ObservableCollection<OperationViewModel>? _operations;
-
-        public CurrencyViewModel(IUnitOfWork unitOfWork, CurrencyEntity currency)
+        public CurrencyViewModel(IUnitOfWork unitOfWork, CurrencyEntity currency, CurrencyOperations operations)
         {
             _unitOfWork = unitOfWork;
             _currency = currency;
+            _operations = operations;
         }
 
         public int Id => _currency.Id;
@@ -43,20 +44,7 @@ namespace SpeculatorApp.Application.MenuViewModels
         {
             get
             {
-                if (_operations == null)
-                {
-                    _operations = new ObservableCollection<OperationViewModel>();
-
-                    var entities = _unitOfWork.Operations.GetAll(_currency.Id);
-
-                    foreach (var entity in entities)
-                    {
-                        var viewModel = new OperationViewModel(entity);
-                        _operations.Add(viewModel);
-                    }
-                }
-
-                return _operations;
+                return _operations.Operations;
             }
         }
     }
