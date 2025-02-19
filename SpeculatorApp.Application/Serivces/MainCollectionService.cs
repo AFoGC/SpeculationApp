@@ -17,10 +17,10 @@ namespace SpeculatorApp.Application.Serivces
             _unitOfWork = unitOfWork;
 
             CurrencyViewModelFactory currencyFactory = new CurrencyViewModelFactory(unitOfWork, this);
-            PairViewModelFactory pairFactory = new PairViewModelFactory(this);
-            ConvertationViewModelFactory convertationFactory = new ConvertationViewModelFactory(this);
-            OperationViewModelFactory operationFactory = new OperationViewModelFactory(this);
-            OperationTypeViewModelFactory operationTypeFactory = new OperationTypeViewModelFactory();
+            PairViewModelFactory pairFactory = new PairViewModelFactory(unitOfWork, this);
+            ConvertationViewModelFactory convertationFactory = new ConvertationViewModelFactory(unitOfWork, this);
+            OperationViewModelFactory operationFactory = new OperationViewModelFactory(unitOfWork, this);
+            OperationTypeViewModelFactory operationTypeFactory = new OperationTypeViewModelFactory(unitOfWork, this);
 
             CurrencyCollection = new CurrencyCollectionService(unitOfWork, currencyFactory);
             PairCollection = new PairCollectionService(unitOfWork, pairFactory);

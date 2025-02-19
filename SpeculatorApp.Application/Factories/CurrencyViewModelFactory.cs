@@ -2,6 +2,7 @@
 using SpeculationApp.Domain.Repositories;
 using SpeculatorApp.Application.MenuViewModels;
 using SpeculatorApp.Application.Serivces;
+using SpeculatorApp.Application.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace SpeculatorApp.Application.Factories
 
         public CurrencyViewModel CreateViewModel(CurrencyEntity model)
         {
-            var operations = _mainCollectionService.OperationCollection.GetOperations(model.Id);
-            return new CurrencyViewModel(_unitOfWork, model, operations);
+            CurrencyStrategy strategy = new CurrencyStrategy(_unitOfWork, _mainCollectionService, model.Id);
+            return new CurrencyViewModel(model, strategy);
         }
     }
 }

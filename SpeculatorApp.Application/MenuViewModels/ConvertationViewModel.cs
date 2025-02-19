@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Strategies;
 using SpeculatorApp.Application.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace SpeculatorApp.Application.MenuViewModels
     public class ConvertationViewModel : ViewModel
     {
         private readonly ConvertationEntity _convertation;
+        private readonly ConvertationStrategy _strategy;
 
-        public ConvertationViewModel(ConvertationEntity convertation)
+        public ConvertationViewModel(ConvertationEntity convertation, ConvertationStrategy strategy)
         {
             _convertation = convertation;
+            _strategy = strategy;
         }
 
         public int Id => _convertation.Id;

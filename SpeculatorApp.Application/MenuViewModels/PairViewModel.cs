@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Strategies;
 using SpeculatorApp.Application.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,12 @@ namespace SpeculatorApp.Application.MenuViewModels
     public class PairViewModel : ViewModel
     {
         private readonly PairEntity _pair;
-        private readonly CurrencyViewModel _baseCurrency;
-        private readonly CurrencyViewModel _tradeCurrency;
+        private readonly PairStrategy _strategy;
 
-        public PairViewModel(PairEntity pair, CurrencyViewModel baseCurrency, CurrencyViewModel tradeCurrency)
+        public PairViewModel(PairEntity pair, PairStrategy strategy)
         {
             _pair = pair;
-            _baseCurrency = baseCurrency;
-            _tradeCurrency = tradeCurrency;
+            _strategy = strategy;
         }
 
         public int BaseCurrencyId => _pair.BaseCurrencyId;
@@ -29,7 +28,15 @@ namespace SpeculatorApp.Application.MenuViewModels
             set { _pair.PositionInList = value; OnPropertyChanged(); }
         }
 
-        public CurrencyViewModel BaseCurrency => _baseCurrency;
-        public CurrencyViewModel TradeCurrency => _tradeCurrency;
+        public CurrencyViewModel BaseCurrency => _strategy.GetCurrency(_pair.BaseCurrencyId);
+        public CurrencyViewModel TradeCurrency => _strategy.GetCurrency(_pair.TradeCurrencyId);
+
+        public IEnumerable<ConvertationViewModel> Convertations
+        {
+            get
+            {
+                return _strategy.Convertations.Convertations;
+            }
+        }
     }
 }

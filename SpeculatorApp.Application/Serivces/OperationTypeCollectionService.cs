@@ -42,5 +42,13 @@ namespace SpeculatorApp.Application.Serivces
                 return _operationTypes;
             }
         }
+
+        public void Remove(OperationTypeViewModel viewModel)
+        {
+            _unitOfWork.OperationTypes.Delete(viewModel.Id);
+            _unitOfWork.Complete();
+
+            OperationTypes.Remove(viewModel);
+        }
     }
 }

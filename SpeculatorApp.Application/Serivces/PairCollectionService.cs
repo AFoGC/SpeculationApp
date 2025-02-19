@@ -42,5 +42,13 @@ namespace SpeculatorApp.Application.Serivces
                 return _pairs;
             }
         }
+
+        public void Remove(PairViewModel viewModel)
+        {
+            _unitOfWork.Pairs.Delete(viewModel.BaseCurrencyId, viewModel.TradeCurrencyId);
+            _unitOfWork.Complete();
+
+            Pairs.Remove(viewModel);
+        }
     }
 }

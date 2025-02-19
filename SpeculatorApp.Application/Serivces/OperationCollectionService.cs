@@ -2,6 +2,7 @@
 using SpeculationApp.Domain.Repositories;
 using SpeculatorApp.Application.Factories;
 using SpeculatorApp.Application.MenuViewModels;
+using SpeculatorApp.Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,6 +48,17 @@ namespace SpeculatorApp.Application.Serivces
                 return _operations;
             }
         }
+
+        public OperationViewModel AddOperation(OperationEntity operation)
+        {
+            _unitOfWork.Operations.Create(operation);
+            _unitOfWork.Complete();
+
+            var viewModel = _factory.CreateViewModel(operation);
+            Operations.Add(viewModel);
+
+            return viewModel;
+        }
     }
 
     public class OperationCollectionService
@@ -76,6 +88,15 @@ namespace SpeculatorApp.Application.Serivces
             }
 
             return operations;
+        }
+
+        public void Remove(OperationViewModel viewModel)
+        {
+            _unitOfWork.Operations.Delete(viewModel.Id);
+            _unitOfWork.Complete();
+
+            var operations = GetOperations(viewModel.CurrencyId);
+            operations.Operations.Remove(viewModel);
         }
     }
 }

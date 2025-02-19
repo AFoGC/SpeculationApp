@@ -42,5 +42,13 @@ namespace SpeculatorApp.Application.Serivces
                 return _currencies;
             }
         }
+
+        public void Remove(CurrencyViewModel viewModel)
+        {
+            _unitOfWork.Currencies.Delete(viewModel.Id);
+            _unitOfWork.Complete();
+
+            Currencies.Remove(viewModel);
+        }
     }
 }

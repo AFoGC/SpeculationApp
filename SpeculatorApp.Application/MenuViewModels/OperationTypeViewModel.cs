@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Strategies;
 using SpeculatorApp.Application.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace SpeculatorApp.Application.MenuViewModels
     public class OperationTypeViewModel : ViewModel
     {
         private readonly OperationTypeEntity _operationType;
+        private readonly OperationTypeStrategy _strategy;
 
-        public OperationTypeViewModel(OperationTypeEntity operationType)
+        public OperationTypeViewModel(OperationTypeEntity operationType, OperationTypeStrategy strategy)
         {
             _operationType = operationType;
+            _strategy = strategy;
         }
 
         public int Id => _operationType.Id;

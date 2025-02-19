@@ -25,7 +25,7 @@ namespace SpeculatorApp.Application.Serivces
         public int BaseCurrencyId => _baseCurrencyId;
         public int TradeCurrencyId => _tradeCurrencyId;
 
-        public ObservableCollection<ConvertationViewModel> Operations
+        public ObservableCollection<ConvertationViewModel> Convertations
         {
             get
             {
@@ -75,6 +75,15 @@ namespace SpeculatorApp.Application.Serivces
             }
 
             return operations;
+        }
+
+        public void Remove(ConvertationViewModel viewModel)
+        {
+            _unitOfWork.Convertations.Delete(viewModel.Id);
+            _unitOfWork.Complete();
+
+            var operations = GetConvertations(viewModel.BaseCurrencyId, viewModel.TradeCurrencyId);
+            operations.Convertations.Remove(viewModel);
         }
     }
 }
