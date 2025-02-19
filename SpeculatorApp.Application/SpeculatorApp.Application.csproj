@@ -10,8 +10,4 @@
     <ProjectReference Include="..\SpeculationApp.Domain\SpeculationApp.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Serivces\" />
-  </ItemGroup>
-
 </Project>

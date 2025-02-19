@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculationApp.Wpf", "SpeculationApp.Wpf\SpeculationApp.Wpf.csproj", "{83A727D4-B53A-4996-B336-579F03FE752A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeculationApp.Infrastructure", "SpeculationApp.Infrastructure\SpeculationApp.Infrastructure.csproj", "{88A214F2-4489-4B03-9642-0C658A65D747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculationApp.Infrastructure", "SpeculationApp.Infrastructure\SpeculationApp.Infrastructure.csproj", "{88A214F2-4489-4B03-9642-0C658A65D747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeculationApp.Domain", "SpeculationApp.Domain\SpeculationApp.Domain.csproj", "{3F24C6A5-8FD9-4350-924A-82BF51E93187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculationApp.Domain", "SpeculationApp.Domain\SpeculationApp.Domain.csproj", "{3F24C6A5-8FD9-4350-924A-82BF51E93187}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SepulatorApp.Core", "SepulatorApp.Core", "{4D6E9A48-95CF-466D-A65A-14469092A914}"
 EndProject
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpeculatorApp.Application",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpeculatorApp.Infrastructure", "SpeculatorApp.Infrastructure", "{B76111B6-1032-4D2C-9DAC-E479A8DF20BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeculatorApp.Application", "SpeculatorApp.Application\SpeculatorApp.Application.csproj", "{090AFEBD-39E3-4B54-A92C-65B1EC3ABD16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculatorApp.Application", "SpeculatorApp.Application\SpeculatorApp.Application.csproj", "{090AFEBD-39E3-4B54-A92C-65B1EC3ABD16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpeculatorApp.Presentation", "SpeculatorApp.Presentation", "{FC191C44-1437-4892-9708-6D6AC95BB3DC}"
 EndProject
