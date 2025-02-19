@@ -20,7 +20,7 @@ namespace SpeculatorApp.Application.Factories
 
         public ConvertationViewModel CreateViewModel(ConvertationEntity model)
         {
-            throw new NotImplementedException();
+            return new ConvertationViewModel(model);
         }
     }
 }

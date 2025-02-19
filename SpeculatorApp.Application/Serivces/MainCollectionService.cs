@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Repositories;
+using SpeculatorApp.Application.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,17 @@ namespace SpeculatorApp.Application.Serivces
         {
             _unitOfWork = unitOfWork;
 
-            
+            CurrencyViewModelFactory currencyFactory = new CurrencyViewModelFactory(unitOfWork, this);
+            PairViewModelFactory pairFactory = new PairViewModelFactory(this);
+            ConvertationViewModelFactory convertationFactory = new ConvertationViewModelFactory(this);
+            OperationViewModelFactory operationFactory = new OperationViewModelFactory(this);
+            OperationTypeViewModelFactory operationTypeFactory = new OperationTypeViewModelFactory();
 
-            CurrencyCollection = new CurrencyCollectionService();
-            PairCollection = new PairCollectionService();
-            ConvertationCollection = new ConvertationCollectionService();
-            OperationCollection = new OperationCollectionService();
-            OperationTypeCollection = new OperationTypeCollectionService();
+            CurrencyCollection = new CurrencyCollectionService(unitOfWork, currencyFactory);
+            PairCollection = new PairCollectionService(unitOfWork, pairFactory);
+            ConvertationCollection = new ConvertationCollectionService(unitOfWork, convertationFactory);
+            OperationCollection = new OperationCollectionService(unitOfWork, operationFactory);
+            OperationTypeCollection = new OperationTypeCollectionService(unitOfWork, operationTypeFactory);
         }
 
         public CurrencyCollectionService CurrencyCollection { get; }

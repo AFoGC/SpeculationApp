@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Serivces;
 using SpeculatorApp.Application.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace SpeculatorApp.Application.MenuViewModels
     public class OperationViewModel : ViewModel
     {
         private readonly OperationEntity _operation;
+        private readonly OperationTypeCollectionService _operationTypes;
 
-        public OperationViewModel(OperationEntity operation)
+        public OperationViewModel(OperationTypeCollectionService operationTypes, OperationEntity operation)
         {
+            _operationTypes = operationTypes;
             _operation = operation;
         }
 
@@ -33,6 +36,14 @@ namespace SpeculatorApp.Application.MenuViewModels
         {
             get => _operation.Date; 
             set { _operation.Date = value; OnPropertyChanged(); }
+        }
+
+        public OperationTypeViewModel OperationType
+        {
+            get
+            {
+                return _operationTypes.OperationTypes.Single(x => x.Id == _operation.OperationTypeId);
+            }
         }
     }
 }

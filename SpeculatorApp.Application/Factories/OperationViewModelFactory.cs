@@ -1,5 +1,6 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculatorApp.Application.MenuViewModels;
+using SpeculatorApp.Application.Serivces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,17 @@ namespace SpeculatorApp.Application.Factories
 {
     public class OperationViewModelFactory : IViewModelFactory<OperationViewModel, OperationEntity>
     {
+        private readonly MainCollectionService _mainCollectionService;
+
+        public OperationViewModelFactory(MainCollectionService mainCollectionService)
+        {
+            _mainCollectionService = mainCollectionService;
+        }
+
         public OperationViewModel CreateViewModel(OperationEntity model)
         {
-            throw new NotImplementedException();
+            var operationTypes = _mainCollectionService.OperationTypeCollection;
+            return new OperationViewModel(operationTypes, model);
         }
     }
 }

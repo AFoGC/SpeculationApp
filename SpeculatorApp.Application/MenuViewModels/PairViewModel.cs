@@ -11,10 +11,14 @@ namespace SpeculatorApp.Application.MenuViewModels
     public class PairViewModel : ViewModel
     {
         private readonly PairEntity _pair;
+        private readonly CurrencyViewModel _baseCurrency;
+        private readonly CurrencyViewModel _tradeCurrency;
 
-        public PairViewModel(PairEntity pair)
+        public PairViewModel(PairEntity pair, CurrencyViewModel baseCurrency, CurrencyViewModel tradeCurrency)
         {
             _pair = pair;
+            _baseCurrency = baseCurrency;
+            _tradeCurrency = tradeCurrency;
         }
 
         public int BaseCurrencyId => _pair.BaseCurrencyId;
@@ -24,5 +28,8 @@ namespace SpeculatorApp.Application.MenuViewModels
             get => _pair.PositionInList;
             set { _pair.PositionInList = value; OnPropertyChanged(); }
         }
+
+        public CurrencyViewModel BaseCurrency => _baseCurrency;
+        public CurrencyViewModel TradeCurrency => _tradeCurrency;
     }
 }

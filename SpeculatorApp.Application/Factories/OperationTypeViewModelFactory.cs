@@ -10,9 +10,16 @@ namespace SpeculatorApp.Application.Factories
 {
     public class OperationTypeViewModelFactory : IViewModelFactory<OperationTypeViewModel, OperationTypeEntity>
     {
+
+        
+        public OperationTypeViewModelFactory()
+        {
+
+        }
+
         public OperationTypeViewModel CreateViewModel(OperationTypeEntity model)
         {
-            throw new NotImplementedException();
+            return new OperationTypeViewModel(model);
         }
     }
 }
