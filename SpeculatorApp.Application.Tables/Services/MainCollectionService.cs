@@ -1,12 +1,12 @@
 ﻿using SpeculationApp.Domain.Repositories;
-using SpeculatorApp.Application.Factories;
+using SpeculatorApp.Application.Tables.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeculatorApp.Application.Serivces
+namespace SpeculatorApp.Application.Tables.Serivces
 {
     public class MainCollectionService
     {

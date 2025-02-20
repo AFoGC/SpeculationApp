@@ -1,15 +1,15 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
-using SpeculatorApp.Application.MenuViewModels;
-using SpeculatorApp.Application.Serivces;
-using SpeculatorApp.Application.Strategies;
+using SpeculatorApp.Application.Tables.ViewModels;
+using SpeculatorApp.Application.Tables.Serivces;
+using SpeculatorApp.Application.Tables.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeculatorApp.Application.Factories
+namespace SpeculatorApp.Application.Tables.Factories
 {
     public class OperationViewModelFactory : IViewModelFactory<OperationViewModel, OperationEntity>
     {

@@ -1,8 +1,7 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
-using SpeculatorApp.Application.Serivces;
-using SpeculatorApp.Application.Strategies;
-using SpeculatorApp.Application.ViewModels;
+using SpeculatorApp.Application.Tables.Serivces;
+using SpeculatorApp.Application.Tables.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeculatorApp.Application.MenuViewModels
+namespace SpeculatorApp.Application.Tables.ViewModels
 {
     public class CurrencyViewModel : ViewModel
     {

@@ -1,9 +1,9 @@
 ﻿using SpeculationApp.Domain.Repositories;
-using SpeculatorApp.Application.Factories;
-using SpeculatorApp.Application.MenuViewModels;
+using SpeculatorApp.Application.Tables.Factories;
+using SpeculatorApp.Application.Tables.ViewModels;
 using System.Collections.ObjectModel;
 
-namespace SpeculatorApp.Application.Serivces
+namespace SpeculatorApp.Application.Tables.Serivces
 {
     public class PairConvertations
     {

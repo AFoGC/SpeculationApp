@@ -1,14 +1,14 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
-using SpeculatorApp.Application.MenuViewModels;
-using SpeculatorApp.Application.Serivces;
+using SpeculatorApp.Application.Tables.ViewModels;
+using SpeculatorApp.Application.Tables.Serivces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeculatorApp.Application.Strategies
+namespace SpeculatorApp.Application.Tables.Strategies
 {
     public class PairStrategy
     {

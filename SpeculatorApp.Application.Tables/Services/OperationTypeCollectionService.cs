@@ -1,6 +1,6 @@
 ﻿using SpeculationApp.Domain.Repositories;
-using SpeculatorApp.Application.Factories;
-using SpeculatorApp.Application.MenuViewModels;
+using SpeculatorApp.Application.Tables.Factories;
+using SpeculatorApp.Application.Tables.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeculatorApp.Application.Serivces
+namespace SpeculatorApp.Application.Tables.Serivces
 {
     public class OperationTypeCollectionService
     {

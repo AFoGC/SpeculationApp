@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpeculatorApp.Application.Factories
+namespace SpeculatorApp.Application.Tables.Factories
 {
     public interface IViewModelFactory<TViewModel, TModel>
     {
