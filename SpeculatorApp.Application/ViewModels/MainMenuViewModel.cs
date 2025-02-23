@@ -45,12 +45,17 @@ namespace SpeculatorApp.Application.ViewModels
             if (currency == null)
                 throw new NullReferenceException();
 
-            
+            _navigation.Navigate<CurrencyMenuViewModel>().Currency = currency;
         }
 
         public void NavigateToPair(object? obj)
         {
+            PairViewModel? pair = obj as PairViewModel;
 
+            if (pair == null)
+                throw new NullReferenceException();
+
+            _navigation.Navigate<PairMenuViewModel>().Pair = pair;
         }
     }
 }

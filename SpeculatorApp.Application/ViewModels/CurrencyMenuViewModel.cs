@@ -24,5 +24,10 @@ namespace SpeculatorApp.Application.ViewModels
             get => _currencyViewModel;
             set { _currencyViewModel = value; OnPropertyChanged(); }
         }
+
+        public void ToMainMenu(object? obj)
+        {
+            _navigation.Navigate<MainMenuViewModel>();
+        }
     }
 }

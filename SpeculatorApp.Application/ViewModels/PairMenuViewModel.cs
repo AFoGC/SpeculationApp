@@ -24,5 +24,10 @@ namespace SpeculatorApp.Application.ViewModels
             get => _pairViewModel;
             set { _pairViewModel = value; OnPropertyChanged(); }
         }
+
+        public void ToMainMenu(object? obj)
+        {
+            _navigation.Navigate<MainMenuViewModel>();
+        }
     }
 }

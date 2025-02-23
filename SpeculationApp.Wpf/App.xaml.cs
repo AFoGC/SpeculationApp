@@ -1,6 +1,11 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using SpeculationApp.Dal.Context;
+using SpeculationApp.Domain.Repositories;
+using SpeculationApp.Infrastructure.Context;
+using SpeculationApp.Infrastructure.Repositories;
+using SpeculatorApp.Application.Services;
+using SpeculatorApp.Application.Stores;
+using SpeculatorApp.Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,15 +24,30 @@ namespace SpeculationApp.Wpf
     {
         public App()
         {
-            string connectionString = "Datasource=" + "C:\\Users\\sirko\\source\\repos\\SpeculationApp\\SpeculationApp.Wpf\\bin\\Debug\\net7.0-windows\\Films.db";
-            SqliteConnection connection = new SqliteConnection(connectionString);
+            InitializeComponent();
+        }
 
-            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
-            var opt = optionsBuilder.UseSqlite(connection).Options;
-            TradingContext filmsContext = new TradingContext(opt);
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            TradingContext tradingContext = new TradingContext();
+            IUnitOfWork unitOfWork = new UnitOfWork(tradingContext);
+            TablesService tablesService = new TablesService(unitOfWork);
 
-            filmsContext.Database.EnsureCreated();
-            filmsContext.SaveChanges();
+            MenuStore menuStore = new MenuStore();
+            NavigationService navigationService = new NavigationService(menuStore);
+
+            MainMenuViewModel mainMenu = new MainMenuViewModel(navigationService, tablesService);
+            navigationService.AddMenu(mainMenu);
+
+            CurrencyMenuViewModel currencyMenu = new CurrencyMenuViewModel(navigationService);
+            navigationService.AddMenu(currencyMenu);
+
+            PairMenuViewModel pairMenu = new PairMenuViewModel(navigationService);
+            navigationService.AddMenu(pairMenu);
+
+            MainViewModel mainViewModel = new MainViewModel(menuStore);
+
+            base.OnStartup(e);
         }
 
 
