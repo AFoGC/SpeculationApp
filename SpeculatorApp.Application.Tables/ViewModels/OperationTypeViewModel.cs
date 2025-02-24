@@ -23,12 +23,27 @@ namespace SpeculatorApp.Application.Tables.ViewModels
         public string Name
         {
             get => _operationType.Name;
-            set { _operationType.Name = value; OnPropertyChanged(); }
+            set
+            { 
+                _operationType.Name = value;
+                _strategy.Update(_operationType);
+                OnPropertyChanged(); 
+            }
         }
         public bool IsIncrease
         {
             get => _operationType.IsIncrease;
-            set { _operationType.IsIncrease = value; OnPropertyChanged(); }
+            set 
+            { 
+                _operationType.IsIncrease = value;
+                _strategy.Update(_operationType);
+                OnPropertyChanged(); 
+            }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

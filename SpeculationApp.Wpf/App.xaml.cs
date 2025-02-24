@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SpeculationApp.Domain.Repositories;
 using SpeculationApp.Infrastructure.Context;
 using SpeculationApp.Infrastructure.Repositories;
+using SpeculationApp.Wpf.Windows;
 using SpeculatorApp.Application.Services;
 using SpeculatorApp.Application.Stores;
 using SpeculatorApp.Application.ViewModels;
@@ -24,12 +25,19 @@ namespace SpeculationApp.Wpf
     {
         public App()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            TradingContext tradingContext = new TradingContext();
+            string connectionString = "Datasource=C:\\Users\\sirko\\source\\repos\\SpeculationApp\\SpeculationApp.Wpf\\bin\\Debug\\net7.0-windows\\Films.db";
+            SqliteConnection connection = new SqliteConnection(connectionString);
+
+            DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
+            var opt = optionsBuilder.UseSqlite(connection).Options;
+            TradingContext tradingContext = new TradingContext(opt);
+            tradingContext.Database.Migrate();
+
             IUnitOfWork unitOfWork = new UnitOfWork(tradingContext);
             TablesService tablesService = new TablesService(unitOfWork);
 
@@ -39,7 +47,7 @@ namespace SpeculationApp.Wpf
             MainMenuViewModel mainMenu = new MainMenuViewModel(navigationService, tablesService);
             navigationService.AddMenu(mainMenu);
 
-            CurrencyMenuViewModel currencyMenu = new CurrencyMenuViewModel(navigationService);
+            CurrencyMenuViewModel currencyMenu = new CurrencyMenuViewModel(navigationService, tablesService);
             navigationService.AddMenu(currencyMenu);
 
             PairMenuViewModel pairMenu = new PairMenuViewModel(navigationService);
@@ -47,6 +55,14 @@ namespace SpeculationApp.Wpf
 
             MainViewModel mainViewModel = new MainViewModel(menuStore);
 
+            MainWindow = new MainWindow()
+            {
+                DataContext = mainViewModel
+            };
+
+            navigationService.Navigate<MainMenuViewModel>();
+
+            MainWindow.Show();
             base.OnStartup(e);
         }
 

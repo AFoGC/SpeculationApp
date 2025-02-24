@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="SpeculationApp.Wpf.Views.CurrencyMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SpeculationApp.Wpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <local:BindingProxy x:Key="types" Data="{Binding OperationTypes}"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0">
+            <TextBlock Text="{Binding Currency.Code}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Text=" " FontSize="16"/>
+            <TextBlock Text="{Binding Currency.Name}" FontSize="16" Margin="0,0,10,0"/>
+
+            <TextBlock Text="Balance: " FontSize="16" />
+            <TextBlock Text="{Binding Currency.TotalAmount}" FontSize="16" />
+        </StackPanel>
+        
+
+        <DataGrid ItemsSource="{Binding Currency.Operations}" AutoGenerateColumns="False" Grid.Row="1" Margin="10">
+            <DataGrid.Resources>
+                <DataTemplate x:Key="DateTemplate">
+                    <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat=dd.MM.yyyy}" />
+                </DataTemplate>
+                <DataTemplate x:Key="EditingDateTemplate">
+                    <DatePicker SelectedDate="{Binding Date}" />
+                </DataTemplate>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100"/>
+                <DataGridComboBoxColumn Header="Operation Type" Width="150"
+                                        SelectedItemBinding="{Binding SelectedOperationType}"
+                                        ItemsSource="{Binding Path=Data, Source={StaticResource types}}"
+                                        TextBinding="{Binding SelectedOperationType.Name}"/>
+
+                <!--<DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=d}" Width="150"/>-->
+                <DataGridTemplateColumn Header="Date" Width="150" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}"/>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

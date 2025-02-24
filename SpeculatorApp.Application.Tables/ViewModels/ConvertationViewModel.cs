@@ -25,22 +25,42 @@ namespace SpeculatorApp.Application.Tables.ViewModels
         public decimal BaseCurrencyAmount
         {
             get => _convertation.BaseCurrencyAmount;
-            set { _convertation.BaseCurrencyAmount = value; OnPropertyChanged(); }
+            set
+            { 
+                _convertation.BaseCurrencyAmount = value;
+                _strategy.Update(_convertation);
+                OnPropertyChanged(); 
+            }
         }
         public decimal TradeCurrencyAmount
         {
             get => _convertation.TradeCurrencyAmount;
-            set { _convertation.TradeCurrencyAmount = value; OnPropertyChanged(); }
+            set 
+            { 
+                _convertation.TradeCurrencyAmount = value;
+                _strategy.Update(_convertation);
+                OnPropertyChanged(); 
+            }
         }
         public bool ToTradeCurrency
         {
             get => _convertation.ToTradeCurrency;
-            set { _convertation.ToTradeCurrency = value; OnPropertyChanged(); }
+            set 
+            { 
+                _convertation.ToTradeCurrency = value;
+                _strategy.Update(_convertation);
+                OnPropertyChanged(); 
+            }
         }
         public DateTime Date
         {
             get => _convertation.Date;
-            set { _convertation.Date = value; OnPropertyChanged(); }
+            set 
+            { 
+                _convertation.Date = value;
+                _strategy.Update(_convertation);
+                OnPropertyChanged(); 
+            }
         }
     }
 }

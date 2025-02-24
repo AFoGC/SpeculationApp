@@ -12,12 +12,22 @@ namespace SpeculationApp.Infrastructure.Mapers
     {
         public Pair MapDomainEntity(PairEntity entity)
         {
-            throw new NotImplementedException();
+            return new Pair
+            {
+                BaseCurrencyId = entity.BaseCurrencyId,
+                TradeCurrencyId = entity.TradeCurrencyId,
+                PositionInList = entity.PositionInList,
+            };
         }
 
         public PairEntity MapEntity(Pair entity)
         {
-            throw new NotImplementedException();
+            return new PairEntity
+            {
+                BaseCurrencyId = entity.BaseCurrencyId,
+                TradeCurrencyId = entity.TradeCurrencyId,
+                PositionInList = entity.PositionInList,
+            };
         }
     }
 }

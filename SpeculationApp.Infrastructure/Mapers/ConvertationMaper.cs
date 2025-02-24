@@ -12,12 +12,30 @@ namespace SpeculationApp.Infrastructure.Mapers
     {
         public Convertation MapDomainEntity(ConvertationEntity entity)
         {
-            throw new NotImplementedException();
+            return new Convertation
+            {
+                Id = entity.Id,
+                BaseCurrencyId = entity.BaseCurrencyId,
+                TradeCurrencyId = entity.TradeCurrencyId,
+                BaseCurrencyAmount = entity.BaseCurrencyAmount,
+                TradeCurrencyAmount = entity.TradeCurrencyAmount,
+                ToTradeCurrency = entity.ToTradeCurrency,
+                Date = entity.Date,
+            };
         }
 
         public ConvertationEntity MapEntity(Convertation entity)
         {
-            throw new NotImplementedException();
+            return new ConvertationEntity
+            {
+                Id = entity.Id,
+                BaseCurrencyId = entity.BaseCurrencyId,
+                TradeCurrencyId = entity.TradeCurrencyId,
+                BaseCurrencyAmount = entity.BaseCurrencyAmount,
+                TradeCurrencyAmount = entity.TradeCurrencyAmount,
+                ToTradeCurrency = entity.ToTradeCurrency,
+                Date = entity.Date,
+            };
         }
     }
 }

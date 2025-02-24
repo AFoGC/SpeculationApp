@@ -49,7 +49,7 @@ namespace SpeculatorApp.Application.Tables.Strategies
         {
             get
             {
-                throw new NotImplementedException();
+                return 0;
             }
         }
 

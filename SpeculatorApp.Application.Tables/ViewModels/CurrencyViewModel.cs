@@ -26,12 +26,22 @@ namespace SpeculatorApp.Application.Tables.ViewModels
         public string Code
         {
             get => _currency.Code;
-            set { _currency.Code = value; OnPropertyChanged(); }
+            set 
+            { 
+                _currency.Code = value;
+                _strategy.Update(_currency);
+                OnPropertyChanged(); 
+            }
         }
         public string Name
         {
             get => _currency.Name;
-            set { _currency.Name = value; OnPropertyChanged(); }
+            set 
+            { 
+                _currency.Name = value;
+                _strategy.Update(_currency);
+                OnPropertyChanged(); 
+            }
         }
         public decimal TotalAmount
         {

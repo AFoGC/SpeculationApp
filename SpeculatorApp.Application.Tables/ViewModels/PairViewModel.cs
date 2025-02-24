@@ -24,7 +24,12 @@ namespace SpeculatorApp.Application.Tables.ViewModels
         public int PositionInList
         {
             get => _pair.PositionInList;
-            set { _pair.PositionInList = value; OnPropertyChanged(); }
+            set
+            { 
+                _pair.PositionInList = value;
+                _strategy.Update(_pair);
+                OnPropertyChanged(); 
+            }
         }
 
         public CurrencyViewModel BaseCurrency => _strategy.GetCurrency(_pair.BaseCurrencyId);
