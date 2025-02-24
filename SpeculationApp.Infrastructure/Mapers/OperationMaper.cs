@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SpeculationApp.Infrastructure.Mapers
 {
-    public class OperationMaper : IMaper<Operation, OperationEntity>
+    public class OperationMaper : IMaper<Operation, OperationModel>
     {
-        public Operation MapDomainEntity(OperationEntity entity)
+        public Operation MapModel(OperationModel entity)
         {
             return new Operation
             {
@@ -22,9 +23,18 @@ namespace SpeculationApp.Infrastructure.Mapers
             };
         }
 
-        public OperationEntity MapEntity(Operation entity)
+        public void MapModel(OperationModel model, Operation entity)
         {
-            return new OperationEntity
+            entity.Id = model.Id;
+            entity.CurrencyId = model.CurrencyId;
+            entity.OperationTypeId = model.OperationTypeId;
+            entity.Amount = model.Amount;
+            entity.Date = model.Date;
+        }
+
+        public OperationModel MapEntity(Operation entity)
+        {
+            return new OperationModel
             {
                 Id = entity.Id,
                 CurrencyId = entity.CurrencyId,

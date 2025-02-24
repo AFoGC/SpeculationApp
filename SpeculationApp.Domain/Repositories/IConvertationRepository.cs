@@ -9,10 +9,10 @@ namespace SpeculationApp.Domain.Repositories
 {
     public interface IConvertationRepository
     {
-        IEnumerable<ConvertationEntity> GetAll(int baseCurrencyId, int tradeCurrencyId);
-        ConvertationEntity GetById(int id);
-        void Create(ConvertationEntity entity);
-        void Update(ConvertationEntity entity);
+        IEnumerable<ConvertationModel> GetAll(int baseCurrencyId, int tradeCurrencyId);
+        ConvertationModel GetById(int id);
+        void Create(ConvertationModel entity);
+        void Update(ConvertationModel entity);
         void Delete(int id);
         decimal GetBaseCurrencyAmount(int currencyId);
         decimal GetTradeCurrencyAmount(int currencyId);

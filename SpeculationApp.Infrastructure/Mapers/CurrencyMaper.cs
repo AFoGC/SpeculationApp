@@ -5,24 +5,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SpeculationApp.Infrastructure.Mapers
 {
-    public class CurrencyMaper : IMaper<Currency, CurrencyEntity>
+    public class CurrencyMaper : IMaper<Currency, CurrencyModel>
     {
-        public Currency MapDomainEntity(CurrencyEntity entity)
+        public Currency MapModel(CurrencyModel model)
         {
             return new Currency
             {
-                Id = entity.Id,
-                Name = entity.Name,
-                Code = entity.Code,
+                Id = model.Id,
+                Name = model.Name,
+                Code = model.Code,
             };
         }
 
-        public CurrencyEntity MapEntity(Currency entity)
+        public void MapModel(CurrencyModel model, Currency entity)
         {
-            return new CurrencyEntity
+            entity.Id = model.Id;
+            entity.Name = model.Name;
+            entity.Code = model.Code;
+        }
+
+        public CurrencyModel MapEntity(Currency entity)
+        {
+            return new CurrencyModel
             {
                 Id = entity.Id,
                 Name = entity.Name,

@@ -9,16 +9,16 @@ namespace SpeculationApp.Domain.Models
 {
     public class PairModel
     {
-        private readonly PairEntity _entity;
-        private readonly IEnumerable<ConvertationEntity> _convertations;
+        private readonly Entities.PairModel _entity;
+        private readonly IEnumerable<ConvertationModel> _convertations;
 
-        public PairModel(PairEntity entity, IEnumerable<ConvertationEntity> convertations)
+        public PairModel(Entities.PairModel entity, IEnumerable<ConvertationModel> convertations)
         {
             _entity = entity;
             _convertations = convertations;
         }
 
-        public PairEntity PairEntity => _entity;
-        public IEnumerable<ConvertationEntity> Convertations => _convertations;
+        public Entities.PairModel PairEntity => _entity;
+        public IEnumerable<ConvertationModel> Convertations => _convertations;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Domain.Entities
 {
-    public class PairEntity
+    public class PairModel
     {
         public int BaseCurrencyId { get; set; }
         public int TradeCurrencyId { get; set; }

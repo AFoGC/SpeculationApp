@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Domain.Entities
 {
-    public class OperationTypeEntity
+    public class OperationTypeModel
     {
-        public OperationTypeEntity()
+        public OperationTypeModel()
         {
             Name = String.Empty;
         }

@@ -23,7 +23,7 @@ namespace SpeculationApp.Infrastructure.Repositories
             _maper = new OperationMaper();
         }
 
-        public IEnumerable<OperationEntity> GetAll(int currencyId)
+        public IEnumerable<OperationModel> GetAll(int currencyId)
         {
             return _dbContext.Operations
                 .Where(x => x.CurrencyId == currencyId)
@@ -31,7 +31,7 @@ namespace SpeculationApp.Infrastructure.Repositories
                 .Select(x => _maper.MapEntity(x));
         }
 
-        public OperationEntity GetById(int id)
+        public OperationModel GetById(int id)
         {
             var item = _dbContext.Operations
                 .Single(x => x.Id == id);
@@ -39,18 +39,18 @@ namespace SpeculationApp.Infrastructure.Repositories
             return _maper.MapEntity(item);
         }
 
-        public void Create(OperationEntity entity)
+        public void Create(OperationModel entity)
         {
             entity.Id = 0;
 
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Operations.Add(item);
         }
 
-        public void Update(OperationEntity entity)
+        public void Update(OperationModel entity)
         {
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Operations.Update(item);
         }

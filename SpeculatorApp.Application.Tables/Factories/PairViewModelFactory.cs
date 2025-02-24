@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SpeculatorApp.Application.Tables.Factories
 {
-    public class PairViewModelFactory : IViewModelFactory<PairViewModel, PairEntity>
+    public class PairViewModelFactory : IViewModelFactory<PairViewModel, PairModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly MainCollectionService _mainCollectionService;
@@ -22,7 +22,7 @@ namespace SpeculatorApp.Application.Tables.Factories
             _mainCollectionService = mainCollectionService;
         }
 
-        public PairViewModel CreateViewModel(PairEntity model)
+        public PairViewModel CreateViewModel(PairModel model)
         {
             PairStrategy strategy = new PairStrategy(_unitOfWork, _mainCollectionService, model.BaseCurrencyId, model.TradeCurrencyId);
             return new PairViewModel(model, strategy);

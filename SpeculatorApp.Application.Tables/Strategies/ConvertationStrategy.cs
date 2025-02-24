@@ -28,7 +28,7 @@ namespace SpeculatorApp.Application.Tables.Strategies
             convertations.Remove(viewModel);
         }
 
-        public void Update(ConvertationEntity model)
+        public void Update(ConvertationModel model)
         {
             _unitOfWork.Convertations.Update(model);
             _unitOfWork.Complete();

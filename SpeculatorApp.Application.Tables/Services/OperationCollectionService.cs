@@ -48,7 +48,7 @@ namespace SpeculatorApp.Application.Tables.Serivces
             }
         }
 
-        public OperationViewModel AddOperation(OperationEntity operation)
+        public OperationViewModel AddOperation(OperationModel operation)
         {
             _unitOfWork.Operations.Create(operation);
             _unitOfWork.Complete();

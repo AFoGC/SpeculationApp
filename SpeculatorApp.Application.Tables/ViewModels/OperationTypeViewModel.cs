@@ -10,10 +10,10 @@ namespace SpeculatorApp.Application.Tables.ViewModels
 {
     public class OperationTypeViewModel : ViewModel
     {
-        private readonly OperationTypeEntity _operationType;
+        private readonly OperationTypeModel _operationType;
         private readonly OperationTypeStrategy _strategy;
 
-        public OperationTypeViewModel(OperationTypeEntity operationType, OperationTypeStrategy strategy)
+        public OperationTypeViewModel(OperationTypeModel operationType, OperationTypeStrategy strategy)
         {
             _operationType = operationType;
             _strategy = strategy;

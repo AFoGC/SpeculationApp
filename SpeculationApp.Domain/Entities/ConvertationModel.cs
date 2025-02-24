@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Domain.Entities
 {
-    public class ConvertationEntity
+    public class ConvertationModel
     {
         public int Id { get; set; }
         public int BaseCurrencyId { get; set; }

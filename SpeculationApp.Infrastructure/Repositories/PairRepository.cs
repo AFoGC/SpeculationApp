@@ -22,14 +22,14 @@ namespace SpeculationApp.Infrastructure.Repositories
             _maper = new PairMaper();
         }
 
-        public IEnumerable<PairEntity> GetAll()
+        public IEnumerable<PairModel> GetAll()
         {
             return _dbContext.Pairs
                 .ToList()
                 .Select(x => _maper.MapEntity(x));
         }
 
-        public PairEntity GetById(int baseCurrencyId, int tradeCurrencyId)
+        public PairModel GetById(int baseCurrencyId, int tradeCurrencyId)
         {
             var item = _dbContext.Pairs
                 .Single(x => x.BaseCurrencyId == baseCurrencyId && x.TradeCurrencyId == tradeCurrencyId);
@@ -37,23 +37,23 @@ namespace SpeculationApp.Infrastructure.Repositories
             return _maper.MapEntity(item);
         }
 
-        public void Create(PairEntity entity)
+        public void Create(PairModel entity)
         {
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Pairs.Add(item);
         }
 
-        public void Update(PairEntity entity)
+        public void Update(PairModel entity)
         {
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Pairs.Update(item);
         }
 
-        public void Update(IEnumerable<PairEntity> entities)
+        public void Update(IEnumerable<PairModel> entities)
         {
-            var items = entities.Select(x => _maper.MapDomainEntity(x));
+            var items = entities.Select(x => _maper.MapModel(x));
 
             _dbContext.Pairs.UpdateRange(items);
         }

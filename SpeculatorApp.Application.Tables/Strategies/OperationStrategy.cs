@@ -37,7 +37,7 @@ namespace SpeculatorApp.Application.Tables.Strategies
             operations.Remove(viewModel);
         }
 
-        public void Update(OperationEntity model)
+        public void Update(OperationModel model)
         {
             _unitOfWork.Operations.Update(model);
             _unitOfWork.Complete();

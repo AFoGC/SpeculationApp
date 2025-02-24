@@ -9,11 +9,11 @@ namespace SpeculationApp.Domain.Repositories
 {
     public interface IPairRepository
     {
-        IEnumerable<PairEntity> GetAll();
-        PairEntity GetById(int baseCurrencyId, int tradeCurrencyId);
-        void Create(PairEntity entity);
-        void Update(PairEntity entity);
-        void Update(IEnumerable<PairEntity> entities);
+        IEnumerable<PairModel> GetAll();
+        PairModel GetById(int baseCurrencyId, int tradeCurrencyId);
+        void Create(PairModel entity);
+        void Update(PairModel entity);
+        void Update(IEnumerable<PairModel> entities);
         void Delete(int baseCurrencyId, int tradeCurrencyId);
     }
 }

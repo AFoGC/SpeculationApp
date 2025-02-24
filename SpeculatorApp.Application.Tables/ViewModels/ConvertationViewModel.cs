@@ -10,10 +10,10 @@ namespace SpeculatorApp.Application.Tables.ViewModels
 {
     public class ConvertationViewModel : ViewModel
     {
-        private readonly ConvertationEntity _convertation;
+        private readonly ConvertationModel _convertation;
         private readonly ConvertationStrategy _strategy;
 
-        public ConvertationViewModel(ConvertationEntity convertation, ConvertationStrategy strategy)
+        public ConvertationViewModel(ConvertationModel convertation, ConvertationStrategy strategy)
         {
             _convertation = convertation;
             _strategy = strategy;

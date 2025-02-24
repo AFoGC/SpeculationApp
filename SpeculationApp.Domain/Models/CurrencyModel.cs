@@ -10,16 +10,16 @@ namespace SpeculationApp.Domain.Models
 {
     public class CurrencyModel
     {
-        private readonly CurrencyEntity _entity;
-        private readonly IEnumerable<OperationEntity> _operations;
+        private readonly Entities.CurrencyModel _entity;
+        private readonly IEnumerable<OperationModel> _operations;
 
-        public CurrencyModel(CurrencyEntity entity, IEnumerable<OperationEntity> operations)
+        public CurrencyModel(Entities.CurrencyModel entity, IEnumerable<OperationModel> operations)
         {
             _entity = entity;
             _operations = operations;
         }
 
-        public CurrencyEntity CurrencyEntity => _entity;
-        public IEnumerable<OperationEntity> Operations => _operations;
+        public Entities.CurrencyModel CurrencyEntity => _entity;
+        public IEnumerable<OperationModel> Operations => _operations;
     }
 }

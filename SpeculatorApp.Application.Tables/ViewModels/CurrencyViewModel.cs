@@ -13,10 +13,10 @@ namespace SpeculatorApp.Application.Tables.ViewModels
 {
     public class CurrencyViewModel : ViewModel
     {
-        private readonly CurrencyEntity _currency;
+        private readonly CurrencyModel _currency;
         private readonly CurrencyStrategy _strategy;
 
-        public CurrencyViewModel(CurrencyEntity currency, CurrencyStrategy strategy)
+        public CurrencyViewModel(CurrencyModel currency, CurrencyStrategy strategy)
         {
             _currency = currency;
             _strategy = strategy;

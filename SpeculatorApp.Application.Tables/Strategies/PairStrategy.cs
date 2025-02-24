@@ -60,7 +60,7 @@ namespace SpeculatorApp.Application.Tables.Strategies
             pairs.Remove(viewModel);
         }
 
-        public void Update(PairEntity model)
+        public void Update(PairModel model)
         {
             _unitOfWork.Pairs.Update(model);
             _unitOfWork.Complete();

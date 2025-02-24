@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Domain.Entities
 {
-    public class CurrencyEntity
+    public class CurrencyModel
     {
-        public CurrencyEntity()
+        public CurrencyModel()
         {
             Code = String.Empty;
             Name = String.Empty;

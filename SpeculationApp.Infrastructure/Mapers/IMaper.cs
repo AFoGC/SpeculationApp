@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Infrastructure.Mapers
 {
-    public interface IMaper<TEntity, TDomainEntity>
+    public interface IMaper<TEntity, TModel>
     {
-        TDomainEntity MapEntity(TEntity entity);
-        TEntity MapDomainEntity(TDomainEntity entity); 
+        TModel MapEntity(TEntity entity);
+        TEntity MapModel(TModel model);
+        void MapModel(TModel model, TEntity entity);
     }
 }

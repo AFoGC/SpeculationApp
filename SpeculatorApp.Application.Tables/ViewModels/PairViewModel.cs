@@ -10,10 +10,10 @@ namespace SpeculatorApp.Application.Tables.ViewModels
 {
     public class PairViewModel : ViewModel
     {
-        private readonly PairEntity _pair;
+        private readonly PairModel _pair;
         private readonly PairStrategy _strategy;
 
-        public PairViewModel(PairEntity pair, PairStrategy strategy)
+        public PairViewModel(PairModel pair, PairStrategy strategy)
         {
             _pair = pair;
             _strategy = strategy;

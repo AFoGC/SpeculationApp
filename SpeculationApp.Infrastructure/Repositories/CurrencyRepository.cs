@@ -21,14 +21,14 @@ namespace SpeculationApp.Infrastructure.Repositories
             _maper = new CurrencyMaper();
         }
 
-        public IEnumerable<CurrencyEntity> GetAll()
+        public IEnumerable<CurrencyModel> GetAll()
         {
             return _dbContext.Currencies
                 .ToList()
                 .Select(x => _maper.MapEntity(x));
         }
 
-        public CurrencyEntity GetById(int id)
+        public CurrencyModel GetById(int id)
         {
             var item = _dbContext.Currencies
                 .Single(x => x.Id == id);
@@ -36,18 +36,18 @@ namespace SpeculationApp.Infrastructure.Repositories
             return _maper.MapEntity(item);
         }
 
-        public void Create(CurrencyEntity entity)
+        public void Create(CurrencyModel entity)
         {
             entity.Id = 0;
 
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Currencies.Add(item);
         }
 
-        public void Update(CurrencyEntity entity)
+        public void Update(CurrencyModel entity)
         {
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Currencies.Update(item);
         }

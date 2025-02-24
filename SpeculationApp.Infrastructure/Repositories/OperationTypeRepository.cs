@@ -21,14 +21,14 @@ namespace SpeculationApp.Infrastructure.Repositories
             _maper = new OperationTypeMaper();
         }
 
-        public IEnumerable<OperationTypeEntity> GetAll()
+        public IEnumerable<OperationTypeModel> GetAll()
         {
             return _dbContext.OperationTypes
                 .ToList()
                 .Select(x => _maper.MapEntity(x));
         }
 
-        public OperationTypeEntity GetById(int id)
+        public OperationTypeModel GetById(int id)
         {
             var item = _dbContext.OperationTypes
                 .Single(x => x.Id == id);
@@ -36,18 +36,18 @@ namespace SpeculationApp.Infrastructure.Repositories
             return _maper.MapEntity(item);
         }
 
-        public void Create(OperationTypeEntity entity)
+        public void Create(OperationTypeModel entity)
         {
             entity.Id = 0;
 
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.OperationTypes.Add(item);
         }
 
-        public void Update(OperationTypeEntity entity)
+        public void Update(OperationTypeModel entity)
         {
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.OperationTypes.Update(item);
         }

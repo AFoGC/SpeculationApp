@@ -8,21 +8,28 @@ using System.Threading.Tasks;
 
 namespace SpeculationApp.Infrastructure.Mapers
 {
-    public class PairMaper : IMaper<Pair, PairEntity>
+    public class PairMaper : IMaper<Pair, PairModel>
     {
-        public Pair MapDomainEntity(PairEntity entity)
+        public Pair MapModel(PairModel model)
         {
             return new Pair
             {
-                BaseCurrencyId = entity.BaseCurrencyId,
-                TradeCurrencyId = entity.TradeCurrencyId,
-                PositionInList = entity.PositionInList,
+                BaseCurrencyId = model.BaseCurrencyId,
+                TradeCurrencyId = model.TradeCurrencyId,
+                PositionInList = model.PositionInList,
             };
         }
 
-        public PairEntity MapEntity(Pair entity)
+        public void MapModel(PairModel model, Pair entity)
         {
-            return new PairEntity
+            entity.BaseCurrencyId = model.BaseCurrencyId;
+            entity.TradeCurrencyId = model.TradeCurrencyId;
+            entity.PositionInList = model.PositionInList;
+        }
+
+        public PairModel MapEntity(Pair entity)
+        {
+            return new PairModel
             {
                 BaseCurrencyId = entity.BaseCurrencyId,
                 TradeCurrencyId = entity.TradeCurrencyId,

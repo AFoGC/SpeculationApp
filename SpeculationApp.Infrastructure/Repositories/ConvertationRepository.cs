@@ -16,7 +16,7 @@ namespace SpeculationApp.Infrastructure.Repositories
             _maper = new ConvertationMaper();
         }
 
-        public IEnumerable<ConvertationEntity> GetAll(int baseCurrencyId, int tradeCurrencyId)
+        public IEnumerable<ConvertationModel> GetAll(int baseCurrencyId, int tradeCurrencyId)
         {
             return _dbContext.Convertations
                 .Where(x => x.BaseCurrencyId == baseCurrencyId && x.TradeCurrencyId == tradeCurrencyId)
@@ -24,7 +24,7 @@ namespace SpeculationApp.Infrastructure.Repositories
                 .Select(x => _maper.MapEntity(x));
         }
 
-        public ConvertationEntity GetById(int id)
+        public ConvertationModel GetById(int id)
         {
             var item = _dbContext.Convertations
                 .Single(x => x.Id == id);
@@ -32,18 +32,18 @@ namespace SpeculationApp.Infrastructure.Repositories
             return _maper.MapEntity(item);
         }
 
-        public void Create(ConvertationEntity entity)
+        public void Create(ConvertationModel entity)
         {
             entity.Id = 0;
 
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Convertations.Add(item);
         }
 
-        public void Update(ConvertationEntity entity)
+        public void Update(ConvertationModel entity)
         {
-            var item = _maper.MapDomainEntity(entity);
+            var item = _maper.MapModel(entity);
 
             _dbContext.Convertations.Update(item);
         }

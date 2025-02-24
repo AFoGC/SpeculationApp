@@ -9,10 +9,10 @@ namespace SpeculationApp.Domain.Repositories
 {
     public interface IOperationTypeRepository
     {
-        IEnumerable<OperationTypeEntity> GetAll();
-        OperationTypeEntity GetById(int id);
-        void Create(OperationTypeEntity entity);
-        void Update(OperationTypeEntity entity);
+        IEnumerable<OperationTypeModel> GetAll();
+        OperationTypeModel GetById(int id);
+        void Create(OperationTypeModel entity);
+        void Update(OperationTypeModel entity);
         void Delete(int id);
     }
 }

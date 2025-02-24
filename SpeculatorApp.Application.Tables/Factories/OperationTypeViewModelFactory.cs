@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SpeculatorApp.Application.Tables.Factories
 {
-    public class OperationTypeViewModelFactory : IViewModelFactory<OperationTypeViewModel, OperationTypeEntity>
+    public class OperationTypeViewModelFactory : IViewModelFactory<OperationTypeViewModel, OperationTypeModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly MainCollectionService _mainCollectionService;
@@ -22,7 +22,7 @@ namespace SpeculatorApp.Application.Tables.Factories
             _mainCollectionService = mainCollectionService;
         }
 
-        public OperationTypeViewModel CreateViewModel(OperationTypeEntity model)
+        public OperationTypeViewModel CreateViewModel(OperationTypeModel model)
         {
             OperationTypeStrategy strategy = new OperationTypeStrategy(_unitOfWork, _mainCollectionService);
             return new OperationTypeViewModel(model, strategy);

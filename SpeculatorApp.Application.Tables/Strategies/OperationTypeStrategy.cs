@@ -28,7 +28,7 @@ namespace SpeculatorApp.Application.Tables.Strategies
             operationTypes.Remove(viewModel);
         }
 
-        public void Update(OperationTypeEntity model)
+        public void Update(OperationTypeModel model)
         {
             _unitOfWork.OperationTypes.Update(model);
             _unitOfWork.Complete();

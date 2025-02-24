@@ -9,10 +9,10 @@ namespace SpeculationApp.Domain.Repositories
 {
     public interface ICurrencyRepository
     {
-        IEnumerable<CurrencyEntity> GetAll();
-        CurrencyEntity GetById(int id);
-        void Create(CurrencyEntity entity);
-        void Update(CurrencyEntity entity);
+        IEnumerable<CurrencyModel> GetAll();
+        CurrencyModel GetById(int id);
+        void Create(CurrencyModel entity);
+        void Update(CurrencyModel entity);
         void Delete(int id);
     }
 }

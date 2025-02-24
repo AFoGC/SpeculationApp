@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SpeculatorApp.Application.Tables.Factories
 {
-    public class ConvertationViewModelFactory : IViewModelFactory<ConvertationViewModel, ConvertationEntity>
+    public class ConvertationViewModelFactory : IViewModelFactory<ConvertationViewModel, ConvertationModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly MainCollectionService _mainCollectionService;
@@ -22,7 +22,7 @@ namespace SpeculatorApp.Application.Tables.Factories
             _mainCollectionService = mainCollectionService;
         }
 
-        public ConvertationViewModel CreateViewModel(ConvertationEntity model)
+        public ConvertationViewModel CreateViewModel(ConvertationModel model)
         {
             ConvertationStrategy strategy = new ConvertationStrategy(_unitOfWork, _mainCollectionService);
             return new ConvertationViewModel(model, strategy);
