@@ -31,20 +31,26 @@
                     <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat=dd.MM.yyyy}" />
                 </DataTemplate>
                 <DataTemplate x:Key="EditingDateTemplate">
-                    <DatePicker SelectedDate="{Binding Date}" />
+                    <DatePicker SelectedDate="{Binding Path=Date, UpdateSourceTrigger=LostFocus}" />
                 </DataTemplate>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100"/>
-                <DataGridComboBoxColumn Header="Operation Type" Width="150"
-                                        SelectedItemBinding="{Binding SelectedOperationType}"
-                                        ItemsSource="{Binding Path=Data, Source={StaticResource types}}"
-                                        TextBinding="{Binding SelectedOperationType.Name}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount, UpdateSourceTrigger=LostFocus}" Width="100"/>
 
-                <!--<DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=d}" Width="150"/>-->
+                <DataGridComboBoxColumn Header="Operation Type" Width="150" SelectedItemBinding="{Binding Path=SelectedOperationType, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=Data, Source={StaticResource types}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=Data, Source={StaticResource types}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+
                 <DataGridTemplateColumn Header="Date" Width="150" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}"/>
-
-
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

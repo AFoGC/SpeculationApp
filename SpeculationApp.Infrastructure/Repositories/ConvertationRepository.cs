@@ -26,34 +26,35 @@ namespace SpeculationApp.Infrastructure.Repositories
 
         public ConvertationModel GetById(int id)
         {
-            var item = _dbContext.Convertations
+            var entity = _dbContext.Convertations
                 .Single(x => x.Id == id);
 
-            return _maper.MapEntity(item);
+            return _maper.MapEntity(entity);
         }
 
-        public void Create(ConvertationModel entity)
+        public void Create(ConvertationModel model)
         {
-            entity.Id = 0;
+            model.Id = 0;
 
-            var item = _maper.MapModel(entity);
+            var entity = _maper.MapModel(model);
 
-            _dbContext.Convertations.Add(item);
+            _dbContext.Convertations.Add(entity);
         }
 
-        public void Update(ConvertationModel entity)
+        public void Update(ConvertationModel model)
         {
-            var item = _maper.MapModel(entity);
+            var entity = _dbContext.Convertations
+                .Single(x => x.Id == model.Id);
 
-            _dbContext.Convertations.Update(item);
+            _maper.MapModel(model, entity);
         }
 
         public void Delete(int id)
         {
-            var item = _dbContext.Convertations
+            var entity = _dbContext.Convertations
                 .Single(x => x.Id == id);
 
-            _dbContext.Convertations.Remove(item);
+            _dbContext.Convertations.Remove(entity);
         }
 
         public decimal GetBaseCurrencyAmount(int currencyId)

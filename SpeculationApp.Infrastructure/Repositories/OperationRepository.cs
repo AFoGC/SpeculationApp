@@ -33,26 +33,27 @@ namespace SpeculationApp.Infrastructure.Repositories
 
         public OperationModel GetById(int id)
         {
-            var item = _dbContext.Operations
+            var entity = _dbContext.Operations
                 .Single(x => x.Id == id);
 
-            return _maper.MapEntity(item);
+            return _maper.MapEntity(entity);
         }
 
-        public void Create(OperationModel entity)
+        public void Create(OperationModel model)
         {
-            entity.Id = 0;
+            model.Id = 0;
 
-            var item = _maper.MapModel(entity);
+            var item = _maper.MapModel(model);
 
             _dbContext.Operations.Add(item);
         }
 
-        public void Update(OperationModel entity)
+        public void Update(OperationModel model)
         {
-            var item = _maper.MapModel(entity);
+            var entity = _dbContext.Operations
+                .Single(x => x.Id == model.Id);
 
-            _dbContext.Operations.Update(item);
+            _maper.MapModel(model, entity);
         }
 
         public void Delete(int id)

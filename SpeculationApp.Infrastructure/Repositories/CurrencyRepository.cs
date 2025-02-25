@@ -30,34 +30,35 @@ namespace SpeculationApp.Infrastructure.Repositories
 
         public CurrencyModel GetById(int id)
         {
-            var item = _dbContext.Currencies
+            var entity = _dbContext.Currencies
                 .Single(x => x.Id == id);
 
-            return _maper.MapEntity(item);
+            return _maper.MapEntity(entity);
         }
 
-        public void Create(CurrencyModel entity)
+        public void Create(CurrencyModel model)
         {
-            entity.Id = 0;
+            model.Id = 0;
 
-            var item = _maper.MapModel(entity);
+            var entity = _maper.MapModel(model);
 
-            _dbContext.Currencies.Add(item);
+            _dbContext.Currencies.Add(entity);
         }
 
-        public void Update(CurrencyModel entity)
+        public void Update(CurrencyModel model)
         {
-            var item = _maper.MapModel(entity);
+            var entity = _dbContext.Currencies
+                .Single(x => x.Id == model.Id);
 
-            _dbContext.Currencies.Update(item);
+            _maper.MapModel(model, entity);
         }
 
         public void Delete(int id)
         {
-            var item = _dbContext.Currencies
+            var entity = _dbContext.Currencies
                 .Single(x => x.Id == id);
 
-            _dbContext.Currencies.Remove(item);
+            _dbContext.Currencies.Remove(entity);
         }
     }
 }

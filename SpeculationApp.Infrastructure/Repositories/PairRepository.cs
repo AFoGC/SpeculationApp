@@ -31,39 +31,41 @@ namespace SpeculationApp.Infrastructure.Repositories
 
         public PairModel GetById(int baseCurrencyId, int tradeCurrencyId)
         {
-            var item = _dbContext.Pairs
+            var entity = _dbContext.Pairs
                 .Single(x => x.BaseCurrencyId == baseCurrencyId && x.TradeCurrencyId == tradeCurrencyId);
 
-            return _maper.MapEntity(item);
+            return _maper.MapEntity(entity);
         }
 
-        public void Create(PairModel entity)
+        public void Create(PairModel model)
         {
-            var item = _maper.MapModel(entity);
+            var entity = _maper.MapModel(model);
 
-            _dbContext.Pairs.Add(item);
+            _dbContext.Pairs.Add(entity);
         }
 
-        public void Update(PairModel entity)
+        public void Update(PairModel model)
         {
-            var item = _maper.MapModel(entity);
+            var entity = _dbContext.Pairs
+                .Single(x => x.BaseCurrencyId == model.BaseCurrencyId && x.TradeCurrencyId == model.TradeCurrencyId);
 
-            _dbContext.Pairs.Update(item);
+            _maper.MapModel(model, entity);
         }
 
-        public void Update(IEnumerable<PairModel> entities)
+        public void Update(IEnumerable<PairModel> models)
         {
-            var items = entities.Select(x => _maper.MapModel(x));
-
-            _dbContext.Pairs.UpdateRange(items);
+            foreach (var model in models)
+            {
+                Update(model);
+            }
         }
 
         public void Delete(int baseCurrencyId, int tradeCurrencyId)
         {
-            var item = _dbContext.Pairs
+            var entity = _dbContext.Pairs
                 .Single(x => x.BaseCurrencyId == baseCurrencyId && x.TradeCurrencyId == tradeCurrencyId);
 
-            _dbContext.Pairs.Remove(item);
+            _dbContext.Pairs.Remove(entity);
         }
     }
 }
