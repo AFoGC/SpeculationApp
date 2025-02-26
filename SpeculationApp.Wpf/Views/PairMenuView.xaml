@@ -7,6 +7,38 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.Resources>
+            <local:BindingProxy x:Key="types" Data="{Binding OperationTypes}"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0">
+            <TextBlock Text="{Binding Pair.BaseCurrency.Code}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Text="/" FontSize="16"/>
+            <TextBlock Text="{Binding Pair.TradeCurrency.Code}" FontSize="16" FontWeight="Bold"/>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1" Margin="10">
+            <DataGrid ItemsSource="{Binding Pair.Convertations}" AutoGenerateColumns="False">
+                <DataGrid.Resources>
+                    <DataTemplate x:Key="DateTemplate">
+                        <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat=dd.MM.yyyy}" />
+                    </DataTemplate>
+                    <DataTemplate x:Key="EditingDateTemplate">
+                        <DatePicker SelectedDate="{Binding Path=Date, UpdateSourceTrigger=LostFocus}" />
+                    </DataTemplate>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Base Currency Amount" Width="150" Binding="{Binding Path=BaseCurrencyAmount, UpdateSourceTrigger=LostFocus}" />
+                    <DataGridCheckBoxColumn Header="To Trade Currency" Width="150" Binding="{Binding Path=ToTradeCurrency, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="Trade Currency Amount" Width="150" Binding="{Binding Path=TradeCurrencyAmount, UpdateSourceTrigger=LostFocus}" />
+
+                    <DataGridTemplateColumn Header="Date" Width="150" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
     </Grid>
 </UserControl>
