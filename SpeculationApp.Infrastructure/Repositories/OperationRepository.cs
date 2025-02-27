@@ -68,17 +68,25 @@ namespace SpeculationApp.Infrastructure.Repositories
         {
             var query = _dbContext.Operations
                 .Include(x => x.OperationType)
-                .Where(x => x.CurrencyId == currencyId);
+                .Where(x => x.CurrencyId == currencyId)
+                .ToList();
 
-            decimal increaseSum = query
-                .Where(x => x.OperationType.IsIncrease)
-                .Sum(x => x.Amount);
+            if (query.Count() != 0)
+            {
+                decimal increaseSum = query
+                    .Where(x => x.OperationType.IsIncrease)
+                    .Sum(x => x.Amount);
 
-            decimal decreaseSum = query
-                .Where(x => x.OperationType.IsIncrease == false)
-                .Sum(x => x.Amount);
+                decimal decreaseSum = query
+                    .Where(x => x.OperationType.IsIncrease == false)
+                    .Sum(x => x.Amount);
 
-            return increaseSum - decreaseSum;
+                return increaseSum - decreaseSum;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

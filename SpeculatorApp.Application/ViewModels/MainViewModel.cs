@@ -1,5 +1,4 @@
 ﻿using SpeculatorApp.Application.Stores;
-using SpeculatorApp.Application.Tables.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

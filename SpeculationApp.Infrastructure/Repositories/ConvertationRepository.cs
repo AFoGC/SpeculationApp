@@ -62,11 +62,13 @@ namespace SpeculationApp.Infrastructure.Repositories
             decimal increaseSum = _dbContext.Convertations
                 .Where(x => x.BaseCurrencyId == currencyId)
                 .Where(x => x.ToTradeCurrency == false)
+                .ToList()
                 .Sum(x => x.BaseCurrencyAmount);
 
             decimal decreaseSum = _dbContext.Convertations
                 .Where(x => x.BaseCurrencyId == currencyId)
                 .Where(x => x.ToTradeCurrency)
+                .ToList()
                 .Sum(x => x.BaseCurrencyAmount);
 
             return increaseSum - decreaseSum;
@@ -77,11 +79,13 @@ namespace SpeculationApp.Infrastructure.Repositories
             decimal increaseSum = _dbContext.Convertations
                 .Where(x => x.TradeCurrencyId == currencyId)
                 .Where(x => x.ToTradeCurrency)
+                .ToList()
                 .Sum(x => x.TradeCurrencyAmount);
 
             decimal decreaseSum = _dbContext.Convertations
                 .Where(x => x.TradeCurrencyId == currencyId)
                 .Where(x => x.ToTradeCurrency == false)
+                .ToList()
                 .Sum(x => x.TradeCurrencyAmount);
 
             return increaseSum - decreaseSum;

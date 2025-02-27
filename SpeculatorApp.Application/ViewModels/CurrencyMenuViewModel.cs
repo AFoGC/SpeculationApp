@@ -1,5 +1,5 @@
 ﻿using SpeculatorApp.Application.Services;
-using SpeculatorApp.Application.Tables.ViewModels;
+using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,25 +12,33 @@ namespace SpeculatorApp.Application.ViewModels
     public class CurrencyMenuViewModel : ViewModel
     {
         private readonly NavigationService _navigation;
-        private readonly TablesService _tables;
+        private readonly CurrencyService _currencyService;
 
-        private CurrencyViewModel? _currencyViewModel;
+        private CurrencyEditViewModel? _currency;
+        private IEnumerable<OperationTypeReadViewModel>? _operationTypes;
 
-        public CurrencyMenuViewModel(NavigationService navigation, TablesService tables)
+        public CurrencyMenuViewModel(NavigationService navigation, CurrencyService currencyService)
         {
             _navigation = navigation;
-            _tables = tables;
+            _currencyService = currencyService;
         }
 
-        public CurrencyViewModel? Currency
+        public CurrencyEditViewModel? Currency
         {
-            get => _currencyViewModel;
-            set { _currencyViewModel = value; OnPropertyChanged(); }
+            get => _currency;
+            private set { _currency = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<OperationTypeViewModel> OperationTypes
+        public IEnumerable<OperationTypeReadViewModel>? OperationTypes
         {
-            get => _tables.Tables.OperationTypeCollection.OperationTypes;
+            get => _operationTypes;
+            private set { _operationTypes = value; OnPropertyChanged(); }
+        }
+
+        public void LoadCurrency(int currencyId)
+        {
+            OperationTypes = _currencyService.LoadOperationTypes();
+            Currency = _currencyService.LoadCurrency(currencyId, OperationTypes);
         }
 
         public void ToMainMenu(object? obj)

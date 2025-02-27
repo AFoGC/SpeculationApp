@@ -16,9 +16,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0">
+            <!--
             <TextBlock Text="{Binding Pair.BaseCurrency.Code}" FontSize="16" FontWeight="Bold"/>
             <TextBlock Text="/" FontSize="16"/>
             <TextBlock Text="{Binding Pair.TradeCurrency.Code}" FontSize="16" FontWeight="Bold"/>
+            -->
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1" Margin="10">

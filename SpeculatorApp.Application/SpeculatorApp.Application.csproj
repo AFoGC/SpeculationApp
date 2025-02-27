@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SpeculationApp.Domain\SpeculationApp.Domain.csproj" />
-    <ProjectReference Include="..\SpeculatorApp.Application.Tables\SpeculatorApp.Application.Tables.csproj" />
   </ItemGroup>
 
 </Project>

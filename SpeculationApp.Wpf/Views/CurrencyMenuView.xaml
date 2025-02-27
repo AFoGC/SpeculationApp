@@ -21,7 +21,7 @@
             <TextBlock Text="{Binding Currency.Name}" FontSize="16" Margin="0,0,10,0"/>
 
             <TextBlock Text="Balance: " FontSize="16" />
-            <TextBlock Text="{Binding Currency.TotalAmount}" FontSize="16" />
+            <!--<TextBlock Text="{Binding Currency.TotalAmount}" FontSize="16" />-->
         </StackPanel>
 
 
@@ -38,7 +38,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount, UpdateSourceTrigger=LostFocus}" Width="100"/>
 
-                    <DataGridComboBoxColumn Header="Operation Type" Width="150" SelectedItemBinding="{Binding Path=SelectedOperationType, UpdateSourceTrigger=PropertyChanged}">
+                    <!--
+                    <DataGridComboBoxColumn Header="Operation Type" Width="150" SelectedItemBinding="{Binding Path=OperationType, UpdateSourceTrigger=PropertyChanged}">
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="ComboBox">
                                 <Setter Property="ItemsSource" Value="{Binding Path=Data, Source={StaticResource types}}" />
@@ -50,6 +51,11 @@
                             </Style>
                         </DataGridComboBoxColumn.EditingElementStyle>
                     </DataGridComboBoxColumn>
+                    -->
+                    <DataGridComboBoxColumn Header="Operation Type" Width="150" 
+                                            SelectedItemBinding="{Binding Path=OperationType, UpdateSourceTrigger=PropertyChanged}" 
+                                            ItemsSource="{Binding Path=Data, Source={StaticResource types}}"/>
+
 
                     <DataGridTemplateColumn Header="Date" Width="150" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}"/>
                 </DataGrid.Columns>

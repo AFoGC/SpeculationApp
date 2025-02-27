@@ -1,6 +1,6 @@
 ﻿using SpeculatorApp.Application.Commands;
 using SpeculatorApp.Application.Services;
-using SpeculatorApp.Application.Tables.ViewModels;
+using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,12 +14,12 @@ namespace SpeculatorApp.Application.ViewModels
     public class MainMenuViewModel : ViewModel
     {
         private readonly NavigationService _navigation;
-        private readonly TablesService _tables;
+        private readonly MainMenuService _menuService;
 
-        public MainMenuViewModel(NavigationService navigation, TablesService tables)
+        public MainMenuViewModel(NavigationService navigation, MainMenuService menuService)
         {
             _navigation = navigation;
-            _tables = tables;
+            _menuService = menuService;
 
             NavigateToCurrencyCommand = new RelayCommand(NavigateToCurrency);
             NavigateToPairCommand = new RelayCommand(NavigateToPair);
@@ -28,42 +28,36 @@ namespace SpeculatorApp.Application.ViewModels
         public ICommand NavigateToCurrencyCommand { get; }
         public ICommand NavigateToPairCommand { get; }
 
-        public ObservableCollection<CurrencyViewModel> Currencies
-        {
-            get
-            {
-                var currencies = _tables.Tables.CurrencyCollection.Currencies;
-                return currencies;
-            }
-        }
-
-        public ObservableCollection<PairViewModel> Pairs
-        {
-            get
-            {
-                var pairs = _tables.Tables.PairCollection.Pairs;
-                return pairs;
-            }
-        }
+        public ObservableCollection<CurrencyReadViewModel> Currencies => _menuService.Currencies;
+        public ObservableCollection<PairReadViewModel> Pairs => _menuService.Pairs;
 
         public void NavigateToCurrency(object? obj)
         {
-            CurrencyViewModel? currency = obj as CurrencyViewModel;
+            CurrencyReadViewModel? currency = obj as CurrencyReadViewModel;
 
             if (currency == null)
                 throw new NullReferenceException();
 
-            _navigation.Navigate<CurrencyMenuViewModel>().Currency = currency;
+            _navigation
+                .Navigate<CurrencyMenuViewModel>()
+                .LoadCurrency(currency.Id);
+        }
+
+        public void LoadData()
+        {
+            _menuService.LoadData();
         }
 
         public void NavigateToPair(object? obj)
         {
-            PairViewModel? pair = obj as PairViewModel;
+            PairReadViewModel? pair = obj as PairReadViewModel;
 
             if (pair == null)
                 throw new NullReferenceException();
 
-            _navigation.Navigate<PairMenuViewModel>().Pair = pair;
+            _navigation
+                .Navigate<PairMenuViewModel>()
+                .LoadPair(pair.BaseCurrencyId, pair.TradeCurrencyId);
         }
     }
 }

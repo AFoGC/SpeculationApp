@@ -39,18 +39,20 @@ namespace SpeculationApp.Wpf
             tradingContext.Database.Migrate();
 
             IUnitOfWork unitOfWork = new UnitOfWork(tradingContext);
-            TablesService tablesService = new TablesService(unitOfWork);
+            MainMenuService mainMenuService = new MainMenuService(unitOfWork);
+            CurrencyService currencyService = new CurrencyService(unitOfWork);
+            PairService pairService = new PairService(unitOfWork);
 
             MenuStore menuStore = new MenuStore();
             NavigationService navigationService = new NavigationService(menuStore);
 
-            MainMenuViewModel mainMenu = new MainMenuViewModel(navigationService, tablesService);
+            MainMenuViewModel mainMenu = new MainMenuViewModel(navigationService, mainMenuService);
             navigationService.AddMenu(mainMenu);
 
-            CurrencyMenuViewModel currencyMenu = new CurrencyMenuViewModel(navigationService, tablesService);
+            CurrencyMenuViewModel currencyMenu = new CurrencyMenuViewModel(navigationService, currencyService);
             navigationService.AddMenu(currencyMenu);
 
-            PairMenuViewModel pairMenu = new PairMenuViewModel(navigationService);
+            PairMenuViewModel pairMenu = new PairMenuViewModel(navigationService, pairService);
             navigationService.AddMenu(pairMenu);
 
             MainViewModel mainViewModel = new MainViewModel(menuStore);
@@ -60,6 +62,7 @@ namespace SpeculationApp.Wpf
                 DataContext = mainViewModel
             };
 
+            mainMenu.LoadData();
             navigationService.Navigate<MainMenuViewModel>();
 
             MainWindow.Show();

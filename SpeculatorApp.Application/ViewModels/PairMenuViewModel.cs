@@ -1,5 +1,5 @@
 ﻿using SpeculatorApp.Application.Services;
-using SpeculatorApp.Application.Tables.ViewModels;
+using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +11,25 @@ namespace SpeculatorApp.Application.ViewModels
     public class PairMenuViewModel : ViewModel
     {
         private readonly NavigationService _navigation;
+        private readonly PairService _pairService;
 
-        private PairViewModel? _pairViewModel;
+        private PairEditViewModel? _pair;
 
-        public PairMenuViewModel(NavigationService navigation)
+        public PairMenuViewModel(NavigationService navigation, PairService pairService)
         {
             _navigation = navigation;
+            _pairService = pairService;
         }
 
-        public PairViewModel? Pair
+        public PairEditViewModel? Pair
         {
-            get => _pairViewModel;
-            set { _pairViewModel = value; OnPropertyChanged(); }
+            get => _pair;
+            private set { _pair = value; OnPropertyChanged(); }
+        }
+
+        public void LoadPair(int baseCurrencyId, int tradeCurrencyId)
+        {
+            Pair = _pairService.LoadPair(baseCurrencyId, tradeCurrencyId);
         }
 
         public void ToMainMenu(object? obj)
