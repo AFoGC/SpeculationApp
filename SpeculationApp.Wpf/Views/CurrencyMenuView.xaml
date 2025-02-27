@@ -38,23 +38,20 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount, UpdateSourceTrigger=LostFocus}" Width="100"/>
 
-                    <!--
-                    <DataGridComboBoxColumn Header="Operation Type" Width="150" SelectedItemBinding="{Binding Path=OperationType, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridComboBoxColumn Header="Operation Type" Width="150">
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="ComboBox">
                                 <Setter Property="ItemsSource" Value="{Binding Path=Data, Source={StaticResource types}}" />
+                                <Setter Property="SelectedIndex" Value="{Binding OperationTypeIndex}"/>
                             </Style>
                         </DataGridComboBoxColumn.ElementStyle>
                         <DataGridComboBoxColumn.EditingElementStyle>
                             <Style TargetType="ComboBox">
                                 <Setter Property="ItemsSource" Value="{Binding Path=Data, Source={StaticResource types}}" />
+                                <Setter Property="SelectedIndex" Value="{Binding OperationTypeIndex}"/>
                             </Style>
                         </DataGridComboBoxColumn.EditingElementStyle>
                     </DataGridComboBoxColumn>
-                    -->
-                    <DataGridComboBoxColumn Header="Operation Type" Width="150" 
-                                            SelectedItemBinding="{Binding Path=OperationType, UpdateSourceTrigger=PropertyChanged}" 
-                                            ItemsSource="{Binding Path=Data, Source={StaticResource types}}"/>
 
 
                     <DataGridTemplateColumn Header="Date" Width="150" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}"/>

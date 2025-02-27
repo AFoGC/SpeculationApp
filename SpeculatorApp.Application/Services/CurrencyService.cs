@@ -38,8 +38,7 @@ namespace SpeculatorApp.Application.Services
 
         public OperationEditViewModel CreateOperation(OperationModel model, IEnumerable<OperationTypeReadViewModel> operationTypes)
         {
-            var type = operationTypes.Single(x => x.Id == model.OperationTypeId);
-            return new OperationEditViewModel(model, type);
+            return new OperationEditViewModel(model, operationTypes);
         }
     }
 }

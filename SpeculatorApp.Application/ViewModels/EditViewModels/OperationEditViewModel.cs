@@ -11,13 +11,17 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
     {
         private OperationModel _model;
         private bool _isChanged;
+        private int _operationTypeIndex;
 
-        private OperationTypeReadViewModel _operationType;
+        private List<OperationTypeReadViewModel> _operationTypes;
 
-        public OperationEditViewModel(OperationModel model, OperationTypeReadViewModel operationType)
+        public OperationEditViewModel(OperationModel model, IEnumerable<OperationTypeReadViewModel> operationTypes)
         {
             _model = model;
-            _operationType = operationType;
+            _operationTypes = operationTypes.ToList();
+
+            var type = _operationTypes.Single(x => x.Id == _model.OperationTypeId);
+            _operationTypeIndex = _operationTypes.IndexOf(type);
         }
 
         public bool IsChanged => _isChanged;
@@ -48,17 +52,15 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             }
         }
 
-        public OperationTypeReadViewModel OperationType
+        public int OperationTypeIndex
         {
-            get => _operationType;
+            get => _operationTypeIndex;
             set
             {
-                _operationType = value;
-                _model.OperationTypeId = _operationType.Id;
-                _isChanged = true;
+                _operationTypeIndex = value;
+                _model.OperationTypeId = _operationTypes[value].Id;
 
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(OperationTypeId));
             }
         }
     }
