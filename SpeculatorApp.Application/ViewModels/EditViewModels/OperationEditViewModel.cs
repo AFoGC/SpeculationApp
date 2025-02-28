@@ -63,5 +63,10 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
                 OnPropertyChanged();
             }
         }
+
+        public OperationModel GetModel()
+        {
+            return _model;
+        }
     }
 }

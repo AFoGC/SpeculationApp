@@ -31,6 +31,23 @@ namespace SpeculatorApp.Application.Services
             return new PairEditViewModel(baseCurrency, tradeCurrency, convertations);
         }
 
+        public bool UpdatePair(PairEditViewModel viewModel)
+        {
+            IEnumerable<ConvertationModel> convertations = viewModel.Convertations
+                .Where(x => x.IsChanged)
+                .Select(x => x.GetModel());
+
+            bool isChanged = viewModel.IsChanged || convertations.Count() > 0;
+
+            foreach (var convertation in convertations)
+            {
+                _unitOfWork.Convertations.Update(convertation);
+            }
+
+            _unitOfWork.Complete();
+            return isChanged;
+        }
+
         public ConvertationEditViewModel CreateConvertation(ConvertationModel model)
         {
             return new ConvertationEditViewModel(model);

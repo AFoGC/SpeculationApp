@@ -50,5 +50,10 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
         }
 
         public ObservableCollection<OperationEditViewModel> Operations => _operations;
+
+        public CurrencyModel GetModel()
+        {
+            return _model;
+        }
     }
 }

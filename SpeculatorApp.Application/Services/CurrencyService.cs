@@ -36,6 +36,29 @@ namespace SpeculatorApp.Application.Services
                 .Select(x => new OperationTypeReadViewModel(_unitOfWork, x));
         }
 
+        public bool UpdateCurrency(CurrencyEditViewModel viewModel)
+        {
+            CurrencyModel currency = viewModel.GetModel();
+            IEnumerable<OperationModel> operations = viewModel.Operations
+                .Where(x => x.IsChanged)
+                .Select(x => x.GetModel());
+
+            bool isChanged = viewModel.IsChanged || operations.Count() > 0;
+
+            if (viewModel.IsChanged)
+            {
+                _unitOfWork.Currencies.Update(currency);
+            }
+            
+            foreach (var operation in operations)
+            {
+                _unitOfWork.Operations.Update(operation);
+            }
+
+            _unitOfWork.Complete();
+            return isChanged;
+        }
+
         public OperationEditViewModel CreateOperation(OperationModel model, IEnumerable<OperationTypeReadViewModel> operationTypes)
         {
             return new OperationEditViewModel(model, operationTypes);

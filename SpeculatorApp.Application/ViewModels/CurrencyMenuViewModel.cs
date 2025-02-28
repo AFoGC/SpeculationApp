@@ -1,4 +1,5 @@
-﻿using SpeculatorApp.Application.Services;
+﻿using SpeculatorApp.Application.Commands;
+using SpeculatorApp.Application.Services;
 using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SpeculatorApp.Application.ViewModels
 {
@@ -21,7 +23,11 @@ namespace SpeculatorApp.Application.ViewModels
         {
             _navigation = navigation;
             _currencyService = currencyService;
+
+            NavigateToMainMenuCommand = new RelayCommand(ToMainMenu);
         }
+
+        public ICommand NavigateToMainMenuCommand { get; }
 
         public CurrencyEditViewModel? Currency
         {
@@ -43,7 +49,19 @@ namespace SpeculatorApp.Application.ViewModels
 
         public void ToMainMenu(object? obj)
         {
-            _navigation.Navigate<MainMenuViewModel>();
+            bool isChanged = false;
+
+            if (Currency != null)
+            {
+                isChanged = _currencyService.UpdateCurrency(Currency);
+            }
+
+            MainMenuViewModel menu = _navigation.Navigate<MainMenuViewModel>();
+
+            if (isChanged)
+            {
+                menu.RefreshData();
+            }
         }
     }
 }

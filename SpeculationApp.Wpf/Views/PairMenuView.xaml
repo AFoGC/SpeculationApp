@@ -15,12 +15,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="0">
-            <!--
-            <TextBlock Text="{Binding Pair.BaseCurrency.Code}" FontSize="16" FontWeight="Bold"/>
-            <TextBlock Text="/" FontSize="16"/>
-            <TextBlock Text="{Binding Pair.TradeCurrency.Code}" FontSize="16" FontWeight="Bold"/>
-            -->
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Button Content="Go to Main Menu" Width="100" Height="21" Margin="10" 
+                    HorizontalAlignment="Left" Command="{Binding NavigateToMainMenuCommand}"/>
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Base" FontSize="16" FontWeight="Bold"/>
+                <TextBlock Text="/" FontSize="16"/>
+                <TextBlock Text="Trade" FontSize="16" FontWeight="Bold"/>
+            </StackPanel>
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1" Margin="10">

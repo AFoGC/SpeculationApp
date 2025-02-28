@@ -23,6 +23,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             _tradeCurrency = tradeCurrency;
 
             _convertations = new ObservableCollection<ConvertationEditViewModel>(convertations);
+            _isChanged = false;
         }
 
         public bool IsChanged => _isChanged;

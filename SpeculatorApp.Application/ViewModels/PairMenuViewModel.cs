@@ -1,10 +1,12 @@
-﻿using SpeculatorApp.Application.Services;
+﻿using SpeculatorApp.Application.Commands;
+using SpeculatorApp.Application.Services;
 using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SpeculatorApp.Application.ViewModels
 {
@@ -19,7 +21,11 @@ namespace SpeculatorApp.Application.ViewModels
         {
             _navigation = navigation;
             _pairService = pairService;
+
+            NavigateToMainMenuCommand = new RelayCommand(ToMainMenu);
         }
+
+        public ICommand NavigateToMainMenuCommand { get; }
 
         public PairEditViewModel? Pair
         {
@@ -34,7 +40,19 @@ namespace SpeculatorApp.Application.ViewModels
 
         public void ToMainMenu(object? obj)
         {
-            _navigation.Navigate<MainMenuViewModel>();
+            bool isChanged = false;
+
+            if (Pair != null)
+            {
+                isChanged = _pairService.UpdatePair(Pair);
+            }
+
+            MainMenuViewModel menu = _navigation.Navigate<MainMenuViewModel>();
+
+            if (isChanged)
+            {
+                menu.RefreshData();
+            }
         }
     }
 }

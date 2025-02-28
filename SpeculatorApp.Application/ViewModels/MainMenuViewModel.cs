@@ -31,6 +31,17 @@ namespace SpeculatorApp.Application.ViewModels
         public ObservableCollection<CurrencyReadViewModel> Currencies => _menuService.Currencies;
         public ObservableCollection<PairReadViewModel> Pairs => _menuService.Pairs;
 
+        public void LoadData()
+        {
+            _menuService.LoadData();
+        }
+
+        public void RefreshData()
+        {
+            foreach (var currency in _menuService.Currencies)
+                currency.RefreshData();
+        }
+
         public void NavigateToCurrency(object? obj)
         {
             CurrencyReadViewModel? currency = obj as CurrencyReadViewModel;
@@ -41,11 +52,6 @@ namespace SpeculatorApp.Application.ViewModels
             _navigation
                 .Navigate<CurrencyMenuViewModel>()
                 .LoadCurrency(currency.Id);
-        }
-
-        public void LoadData()
-        {
-            _menuService.LoadData();
         }
 
         public void NavigateToPair(object? obj)

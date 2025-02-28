@@ -66,5 +66,10 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
                 OnPropertyChanged();
             }
         }
+
+        public ConvertationModel GetModel()
+        {
+            return _model;
+        }
     }
 }
