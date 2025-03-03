@@ -12,19 +12,20 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
     {
         private readonly ObservableCollection<ConvertationEditViewModel> _convertations;
 
-        private CurrencyModel _baseCurrency;
-        private CurrencyModel _tradeCurrency;
         private bool _isChanged;
 
-        public PairEditViewModel(CurrencyModel baseCurrency, CurrencyModel tradeCurrency, 
+        public PairEditViewModel(CurrencyReadViewModel baseCurrency, CurrencyReadViewModel tradeCurrency, 
             IEnumerable<ConvertationEditViewModel> convertations)
         {
-            _baseCurrency = baseCurrency;
-            _tradeCurrency = tradeCurrency;
+            BaseCurrency = baseCurrency;
+            TradeCurrency = tradeCurrency;
 
             _convertations = new ObservableCollection<ConvertationEditViewModel>(convertations);
             _isChanged = false;
         }
+
+        public CurrencyReadViewModel BaseCurrency { get; }
+        public CurrencyReadViewModel TradeCurrency { get; }
 
         public bool IsChanged => _isChanged;
 

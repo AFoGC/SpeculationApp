@@ -47,14 +47,14 @@
                     <DataGridComboBoxColumn Header="Operation Type" Width="150">
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{Binding Path=Data, Source={StaticResource types}}" />
-                                <Setter Property="SelectedIndex" Value="{Binding OperationTypeIndex}"/>
+                                <Setter Property="ItemsSource" Value="{Binding OperationTypes}" />
+                                <Setter Property="SelectedItem" Value="{Binding OperationType}"/>
                             </Style>
                         </DataGridComboBoxColumn.ElementStyle>
                         <DataGridComboBoxColumn.EditingElementStyle>
                             <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{Binding Path=Data, Source={StaticResource types}}" />
-                                <Setter Property="SelectedIndex" Value="{Binding OperationTypeIndex}"/>
+                                <Setter Property="ItemsSource" Value="{Binding OperationTypes}" />
+                                <Setter Property="SelectedItem" Value="{Binding OperationType}"/>
                             </Style>
                         </DataGridComboBoxColumn.EditingElementStyle>
                     </DataGridComboBoxColumn>

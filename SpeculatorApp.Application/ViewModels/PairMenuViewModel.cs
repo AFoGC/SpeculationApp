@@ -40,19 +40,12 @@ namespace SpeculatorApp.Application.ViewModels
 
         public void ToMainMenu(object? obj)
         {
-            bool isChanged = false;
-
             if (Pair != null)
             {
-                isChanged = _pairService.UpdatePair(Pair);
+                _pairService.UpdatePair(Pair);
             }
 
             MainMenuViewModel menu = _navigation.Navigate<MainMenuViewModel>();
-
-            if (isChanged)
-            {
-                menu.RefreshData();
-            }
         }
     }
 }

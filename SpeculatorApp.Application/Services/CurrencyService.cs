@@ -1,5 +1,7 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
+using SpeculatorApp.Application.Factories;
+using SpeculatorApp.Application.Stores;
 using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,31 +14,29 @@ namespace SpeculatorApp.Application.Services
     public class CurrencyService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ReadTablesStore _tablesStore;
+        private readonly EditViewModelFactory _factory;
 
-        public CurrencyService(IUnitOfWork unitOfWork)
+        public CurrencyService(IUnitOfWork unitOfWork, ReadTablesStore tablesStore, EditViewModelFactory factory)
         {
             _unitOfWork = unitOfWork;
+            _tablesStore = tablesStore;
+            _factory = factory;
         }
 
-        public CurrencyEditViewModel LoadCurrency(int currencyId, IEnumerable<OperationTypeReadViewModel> operationTypes)
+        public CurrencyEditViewModel LoadCurrency(int currencyId)
         {
+            IEnumerable<OperationTypeReadViewModel> operationTypes = _tablesStore.OperationTypes;
             CurrencyModel model = _unitOfWork.Currencies.GetById(currencyId);
 
             var operations = _unitOfWork.Operations
                 .GetAll(currencyId)
-                .Select(x => CreateOperation(x, operationTypes));
+                .Select(x => _factory.CreateOperation(x, operationTypes));
 
-            return new CurrencyEditViewModel(model, operations);
+            return _factory.CreateCurrency(model, operations);
         }
 
-        public IEnumerable<OperationTypeReadViewModel> LoadOperationTypes()
-        {
-            return _unitOfWork.OperationTypes
-                .GetAll()
-                .Select(x => new OperationTypeReadViewModel(_unitOfWork, x));
-        }
-
-        public bool UpdateCurrency(CurrencyEditViewModel viewModel)
+        public void UpdateCurrency(CurrencyEditViewModel viewModel)
         {
             CurrencyModel currency = viewModel.GetModel();
             IEnumerable<OperationModel> operations = viewModel.Operations
@@ -55,13 +55,17 @@ namespace SpeculatorApp.Application.Services
                 _unitOfWork.Operations.Update(operation);
             }
 
-            _unitOfWork.Complete();
-            return isChanged;
+            if (isChanged)
+            {
+                _unitOfWork.Complete();
+                UpdateViewModels(viewModel);
+            }
         }
 
-        public OperationEditViewModel CreateOperation(OperationModel model, IEnumerable<OperationTypeReadViewModel> operationTypes)
+        private void UpdateViewModels(CurrencyEditViewModel viewModel)
         {
-            return new OperationEditViewModel(model, operationTypes);
+            var currency = _tablesStore.Currencies.Single(x => x.Id == viewModel.Id);
+            currency.RefreshData();
         }
     }
 }

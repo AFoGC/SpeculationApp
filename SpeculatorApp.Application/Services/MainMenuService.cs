@@ -1,5 +1,7 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
+using SpeculatorApp.Application.Factories;
+using SpeculatorApp.Application.Stores;
 using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,50 +15,43 @@ namespace SpeculatorApp.Application.Services
     public class MainMenuService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ObservableCollection<CurrencyReadViewModel> _currencies;
-        private readonly ObservableCollection<PairReadViewModel> _pairs;
+        private readonly ReadTablesStore _tablesStore;
+        private readonly ReadViewModelFactory _factory;
 
-        public MainMenuService(IUnitOfWork unitOfWork)
+        public MainMenuService(IUnitOfWork unitOfWork, ReadTablesStore tablesStore, ReadViewModelFactory factory)
         {
             _unitOfWork = unitOfWork;
-
-            _currencies = new ObservableCollection<CurrencyReadViewModel>();
-            _pairs = new ObservableCollection<PairReadViewModel>();
+            _tablesStore = tablesStore;
+            _factory = factory;
         }
 
-        public ObservableCollection<CurrencyReadViewModel> Currencies => _currencies;
-        public ObservableCollection<PairReadViewModel> Pairs => _pairs;
+        public ObservableCollection<CurrencyReadViewModel> Currencies => _tablesStore.Currencies;
+        public ObservableCollection<PairReadViewModel> Pairs => _tablesStore.Pairs;
 
         public void LoadData()
         {
-            _currencies.Clear();
-            _pairs.Clear();
+            _tablesStore.Currencies.Clear();
+            _tablesStore.Pairs.Clear();
+            _tablesStore.OperationTypes.Clear();
 
             IEnumerable<CurrencyModel> currencies = _unitOfWork.Currencies.GetAll();
             IEnumerable<PairModel> pairs = _unitOfWork.Pairs.GetAll();
+            IEnumerable<OperationTypeModel> operationTypes = _unitOfWork.OperationTypes.GetAll();
 
             foreach (var currency in currencies)
             {
-                _currencies.Add(CreateCurrency(currency));
+                _tablesStore.Currencies.Add(_factory.CreateCurrency(currency));
             }
 
             foreach (var pair in pairs)
             {
-                _pairs.Add(CreatePair(pair));
+                _tablesStore.Pairs.Add(_factory.CreatePair(pair));
             }
-        }
 
-        private CurrencyReadViewModel CreateCurrency(CurrencyModel model)
-        {
-            return new CurrencyReadViewModel(_unitOfWork, model);
-        }
-
-        private PairReadViewModel CreatePair(PairModel model)
-        {
-            var baseCurrency = _currencies.Single(x => x.Id == model.BaseCurrencyId);
-            var tradeCurrency = _currencies.Single(x => x.Id == model.TradeCurrencyId);
-
-            return new PairReadViewModel(model, baseCurrency, tradeCurrency);
+            foreach (var operationType in operationTypes)
+            {
+                _tablesStore.OperationTypes.Add(_factory.CreateOperationType(operationType));
+            }
         }
     }
 }

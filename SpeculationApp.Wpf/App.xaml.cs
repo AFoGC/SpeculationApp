@@ -4,6 +4,7 @@ using SpeculationApp.Domain.Repositories;
 using SpeculationApp.Infrastructure.Context;
 using SpeculationApp.Infrastructure.Repositories;
 using SpeculationApp.Wpf.Windows;
+using SpeculatorApp.Application.Factories;
 using SpeculatorApp.Application.Services;
 using SpeculatorApp.Application.Stores;
 using SpeculatorApp.Application.ViewModels;
@@ -39,9 +40,14 @@ namespace SpeculationApp.Wpf
             tradingContext.Database.Migrate();
 
             IUnitOfWork unitOfWork = new UnitOfWork(tradingContext);
-            MainMenuService mainMenuService = new MainMenuService(unitOfWork);
-            CurrencyService currencyService = new CurrencyService(unitOfWork);
-            PairService pairService = new PairService(unitOfWork);
+            ReadTablesStore store = new ReadTablesStore();
+
+            EditViewModelFactory editViewModelFactory = new EditViewModelFactory(store, unitOfWork);
+            ReadViewModelFactory readViewModelFactory = new ReadViewModelFactory(store, unitOfWork);
+
+            MainMenuService mainMenuService = new MainMenuService(unitOfWork, store, readViewModelFactory);
+            CurrencyService currencyService = new CurrencyService(unitOfWork, store, editViewModelFactory);
+            PairService pairService = new PairService(unitOfWork, store, editViewModelFactory);
 
             MenuStore menuStore = new MenuStore();
             NavigationService navigationService = new NavigationService(menuStore);

@@ -1,5 +1,7 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
+using SpeculatorApp.Application.Factories;
+using SpeculatorApp.Application.Stores;
 using SpeculatorApp.Application.ViewModels.EditViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,26 +14,30 @@ namespace SpeculatorApp.Application.Services
     public class PairService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ReadTablesStore _tablesStore;
+        private readonly EditViewModelFactory _factory;
 
-        public PairService(IUnitOfWork unitOfWork)
+        public PairService(IUnitOfWork unitOfWork, ReadTablesStore tablesStore, EditViewModelFactory factory)
         {
             _unitOfWork = unitOfWork;
+            _tablesStore = tablesStore;
+            _factory = factory;
         }
 
         public PairEditViewModel LoadPair(int baseCurrencyId, int tradeCurrencyId)
         {
             PairModel pairModel = _unitOfWork.Pairs.GetById(baseCurrencyId, tradeCurrencyId);
-            CurrencyModel baseCurrency = _unitOfWork.Currencies.GetById(baseCurrencyId);
-            CurrencyModel tradeCurrency = _unitOfWork.Currencies.GetById(tradeCurrencyId);
+            CurrencyReadViewModel baseCurrency = _tablesStore.Currencies.Single(x => x.Id == baseCurrencyId);
+            CurrencyReadViewModel tradeCurrency = _tablesStore.Currencies.Single(x => x.Id == tradeCurrencyId);
 
             var convertations = _unitOfWork.Convertations
                 .GetAll(baseCurrencyId, tradeCurrencyId)
-                .Select(x => CreateConvertation(x));
+                .Select(x => _factory.CreateConvertation(x));
 
-            return new PairEditViewModel(baseCurrency, tradeCurrency, convertations);
+            return _factory.CreatePair(baseCurrency, tradeCurrency, convertations);
         }
 
-        public bool UpdatePair(PairEditViewModel viewModel)
+        public void UpdatePair(PairEditViewModel viewModel)
         {
             IEnumerable<ConvertationModel> convertations = viewModel.Convertations
                 .Where(x => x.IsChanged)
@@ -44,13 +50,17 @@ namespace SpeculatorApp.Application.Services
                 _unitOfWork.Convertations.Update(convertation);
             }
 
-            _unitOfWork.Complete();
-            return isChanged;
+            if (isChanged)
+            {
+                _unitOfWork.Complete();
+                UpdateViewModels(viewModel);
+            }
         }
 
-        public ConvertationEditViewModel CreateConvertation(ConvertationModel model)
+        private void UpdateViewModels(PairEditViewModel viewModel)
         {
-            return new ConvertationEditViewModel(model);
+            viewModel.BaseCurrency.RefreshData();
+            viewModel.TradeCurrency.RefreshData();
         }
     }
 }

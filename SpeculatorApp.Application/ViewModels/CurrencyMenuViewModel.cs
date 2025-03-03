@@ -17,7 +17,6 @@ namespace SpeculatorApp.Application.ViewModels
         private readonly CurrencyService _currencyService;
 
         private CurrencyEditViewModel? _currency;
-        private IEnumerable<OperationTypeReadViewModel>? _operationTypes;
 
         public CurrencyMenuViewModel(NavigationService navigation, CurrencyService currencyService)
         {
@@ -37,31 +36,22 @@ namespace SpeculatorApp.Application.ViewModels
 
         public IEnumerable<OperationTypeReadViewModel>? OperationTypes
         {
-            get => _operationTypes;
-            private set { _operationTypes = value; OnPropertyChanged(); }
+            get => null ;
         }
 
         public void LoadCurrency(int currencyId)
         {
-            OperationTypes = _currencyService.LoadOperationTypes();
-            Currency = _currencyService.LoadCurrency(currencyId, OperationTypes);
+            Currency = _currencyService.LoadCurrency(currencyId);
         }
 
         public void ToMainMenu(object? obj)
         {
-            bool isChanged = false;
-
             if (Currency != null)
             {
-                isChanged = _currencyService.UpdateCurrency(Currency);
+                _currencyService.UpdateCurrency(Currency);
             }
 
-            MainMenuViewModel menu = _navigation.Navigate<MainMenuViewModel>();
-
-            if (isChanged)
-            {
-                menu.RefreshData();
-            }
+            _navigation.Navigate<MainMenuViewModel>();
         }
     }
 }
