@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculationApp.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculationApp.Domain", "SpeculationApp.Domain\SpeculationApp.Domain.csproj", "{3F24C6A5-8FD9-4350-924A-82BF51E93187}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SepulatorApp.Core", "SepulatorApp.Core", "{4D6E9A48-95CF-466D-A65A-14469092A914}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpeculatorApp.Core", "SpeculatorApp.Core", "{4D6E9A48-95CF-466D-A65A-14469092A914}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpeculatorApp.Application", "SpeculatorApp.Application", "{A03A8954-A96E-4E57-AACA-358E75969EF0}"
 EndProject
@@ -18,10 +18,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculatorApp.Application", "SpeculatorApp.Application\SpeculatorApp.Application.csproj", "{090AFEBD-39E3-4B54-A92C-65B1EC3ABD16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpeculatorApp.Presentation", "SpeculatorApp.Presentation", "{FC191C44-1437-4892-9708-6D6AC95BB3DC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeculatorApp.Application.Tables", "SpeculatorApp.Application.Tables\SpeculatorApp.Application.Tables.csproj", "{CD36D882-A662-439C-AFEA-63261209E668}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeculationApp.Application.Tables", "SpeculationApp.Application.Tables\SpeculationApp.Application.Tables.csproj", "{C2A5855E-E5EB-449E-8F5A-4D892DFF8044}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,14 +41,6 @@ Global
 		{090AFEBD-39E3-4B54-A92C-65B1EC3ABD16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{090AFEBD-39E3-4B54-A92C-65B1EC3ABD16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{090AFEBD-39E3-4B54-A92C-65B1EC3ABD16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD36D882-A662-439C-AFEA-63261209E668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD36D882-A662-439C-AFEA-63261209E668}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD36D882-A662-439C-AFEA-63261209E668}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD36D882-A662-439C-AFEA-63261209E668}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2A5855E-E5EB-449E-8F5A-4D892DFF8044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2A5855E-E5EB-449E-8F5A-4D892DFF8044}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2A5855E-E5EB-449E-8F5A-4D892DFF8044}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2A5855E-E5EB-449E-8F5A-4D892DFF8044}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,8 +50,6 @@ Global
 		{88A214F2-4489-4B03-9642-0C658A65D747} = {B76111B6-1032-4D2C-9DAC-E479A8DF20BF}
 		{3F24C6A5-8FD9-4350-924A-82BF51E93187} = {4D6E9A48-95CF-466D-A65A-14469092A914}
 		{090AFEBD-39E3-4B54-A92C-65B1EC3ABD16} = {A03A8954-A96E-4E57-AACA-358E75969EF0}
-		{CD36D882-A662-439C-AFEA-63261209E668} = {A03A8954-A96E-4E57-AACA-358E75969EF0}
-		{C2A5855E-E5EB-449E-8F5A-4D892DFF8044} = {A03A8954-A96E-4E57-AACA-358E75969EF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C80E503D-3C9A-4E52-B8E8-C69B26586C52}
