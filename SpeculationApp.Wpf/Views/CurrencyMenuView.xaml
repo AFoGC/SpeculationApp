@@ -31,12 +31,14 @@
         </ToolBar>
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
-            <TextBlock Text="{Binding Currency.Code}" FontSize="16" FontWeight="Bold"/>
-            <TextBlock Text=" " FontSize="16"/>
-            <TextBlock Text="{Binding Currency.Name}" FontSize="16" Margin="0,0,10,0"/>
+            <TextBlock Text="Code: " FontSize="16"/>
+            <TextBox Text="{Binding Path=Currency.Code, UpdateSourceTrigger=PropertyChanged}" Width="75" FontSize="16" />
+            
+            <TextBlock Text=" Name: " FontSize="16"/>
+            <TextBox Text="{Binding Path=Currency.Name, UpdateSourceTrigger=PropertyChanged}" Width="150" FontSize="16"/>
 
-            <TextBlock Text="Balance: " FontSize="16" />
-            <!--<TextBlock Text="{Binding Currency.TotalAmount}" FontSize="16" />-->
+            <TextBlock Text=" Balance: " FontSize="16" />
+            <TextBox Text="000.0000000" Width="100" FontSize="16" />
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="2" Margin="10">
