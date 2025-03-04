@@ -38,8 +38,17 @@ namespace SpeculationApp.Infrastructure.Repositories
 
         public void Create(CurrencyModel model)
         {
-            model.Id = 0;
+            int id = 1;
 
+            if (model.Id == 0)
+            {
+                int count = _dbContext.Currencies.Count();
+
+                if (count != 0)
+                    id = _dbContext.Currencies.Max(x => x.Id);
+            }
+
+            model.Id = id + 1;
             var entity = _maper.MapModel(model);
 
             _dbContext.Currencies.Add(entity);

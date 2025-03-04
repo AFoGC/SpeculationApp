@@ -41,8 +41,17 @@ namespace SpeculationApp.Infrastructure.Repositories
 
         public void Create(OperationModel model)
         {
-            model.Id = 0;
+            int id = 1;
 
+            if (model.Id == 0)
+            {
+                int count = _dbContext.Operations.Count();
+
+                if (count != 0)
+                    id = _dbContext.Operations.Max(x => x.Id);
+            }
+
+            model.Id = id + 1;
             var item = _maper.MapModel(model);
 
             _dbContext.Operations.Add(item);

@@ -42,8 +42,6 @@ namespace SpeculationApp.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Доавить правило генерации Id в БД 
-
             modelBuilder.ApplyConfiguration(new ConvertationConfiguration());
             modelBuilder.ApplyConfiguration(new CurrencyConfiguration());
             modelBuilder.ApplyConfiguration(new OperationConfiguration());

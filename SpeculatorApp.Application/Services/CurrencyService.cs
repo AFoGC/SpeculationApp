@@ -62,6 +62,34 @@ namespace SpeculatorApp.Application.Services
             }
         }
 
+        public void AddOperation(CurrencyEditViewModel viewModel)
+        {
+            int operationTypeId = _tablesStore.OperationTypes.First().Id;
+
+            OperationModel operation = new OperationModel()
+            {
+                Id = 0,
+                CurrencyId = viewModel.Id,
+                OperationTypeId = operationTypeId,
+                Date= DateTime.Now,
+                Amount = 0
+            };
+
+            _unitOfWork.Operations.Create(operation);
+            _unitOfWork.Complete();
+
+            var operationViewModel = _factory.CreateOperation(operation, _tablesStore.OperationTypes);
+            viewModel.Operations.Add(operationViewModel);
+        }
+
+        public void RemoveOperation(CurrencyEditViewModel currency, OperationEditViewModel operation)
+        {
+            _unitOfWork.Operations.Delete(operation.Id);
+            _unitOfWork.Complete();
+
+            currency.Operations.Remove(operation);
+        }
+
         private void UpdateViewModels(CurrencyEditViewModel viewModel)
         {
             var currency = _tablesStore.Currencies.Single(x => x.Id == viewModel.Id);

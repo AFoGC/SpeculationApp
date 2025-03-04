@@ -12,27 +12,36 @@
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="0">
-            <Button Content="Go to Main Menu" Width="100" Height="21" Margin="10" 
+        <ToolBar Grid.Row="0">
+            <Button Content="Go to Main Menu" Width="100" Height="21"  
                     HorizontalAlignment="Left" Command="{Binding NavigateToMainMenuCommand}"/>
             
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <TextBlock Text="{Binding Currency.Code}" FontSize="16" FontWeight="Bold"/>
-                <TextBlock Text=" " FontSize="16"/>
-                <TextBlock Text="{Binding Currency.Name}" FontSize="16" Margin="0,0,10,0"/>
+            <Separator />
 
-                <TextBlock Text="Balance: " FontSize="16" />
-                <!--<TextBlock Text="{Binding Currency.TotalAmount}" FontSize="16" />-->
-            </StackPanel>
+            <Button Content="Add Operation" Width="120" Height="21"
+                        Command="{Binding AddOperationCommand}"/>
+            
+            <Button Content="Remove Operation" Width="120" Height="21"
+                        Command="{Binding RemoveOperationCommand}"/>
+
+        </ToolBar>
+
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
+            <TextBlock Text="{Binding Currency.Code}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Text=" " FontSize="16"/>
+            <TextBlock Text="{Binding Currency.Name}" FontSize="16" Margin="0,0,10,0"/>
+
+            <TextBlock Text="Balance: " FontSize="16" />
+            <!--<TextBlock Text="{Binding Currency.TotalAmount}" FontSize="16" />-->
         </StackPanel>
-        
 
-
-        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1" Margin="10">
-            <DataGrid ItemsSource="{Binding Currency.Operations}" AutoGenerateColumns="False">
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="2" Margin="10">
+            <DataGrid ItemsSource="{Binding Currency.Operations}" SelectedItem="{Binding SelectedOperation}" 
+                      AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <DataTemplate x:Key="DateTemplate">
                         <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat=dd.MM.yyyy}" />
@@ -43,22 +52,20 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount, UpdateSourceTrigger=LostFocus}" Width="100"/>
-
                     <DataGridComboBoxColumn Header="Operation Type" Width="150">
                         <DataGridComboBoxColumn.ElementStyle>
                             <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{Binding OperationTypes}" />
-                                <Setter Property="SelectedItem" Value="{Binding OperationType}"/>
+                                <Setter Property="ItemsSource" Value="{Binding Path=OperationTypes}" />
+                                <Setter Property="SelectedItem" Value="{Binding Path=OperationType, UpdateSourceTrigger=PropertyChanged}"/>
                             </Style>
                         </DataGridComboBoxColumn.ElementStyle>
                         <DataGridComboBoxColumn.EditingElementStyle>
                             <Style TargetType="ComboBox">
-                                <Setter Property="ItemsSource" Value="{Binding OperationTypes}" />
-                                <Setter Property="SelectedItem" Value="{Binding OperationType}"/>
+                                <Setter Property="ItemsSource" Value="{Binding Path=OperationTypes}" />
+                                <Setter Property="SelectedItem" Value="{Binding Path=OperationType, UpdateSourceTrigger=PropertyChanged}"/>
                             </Style>
                         </DataGridComboBoxColumn.EditingElementStyle>
                     </DataGridComboBoxColumn>
-
 
                     <DataGridTemplateColumn Header="Date" Width="150" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}"/>
                 </DataGrid.Columns>

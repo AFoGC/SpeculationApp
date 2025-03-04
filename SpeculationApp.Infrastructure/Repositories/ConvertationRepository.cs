@@ -34,8 +34,17 @@ namespace SpeculationApp.Infrastructure.Repositories
 
         public void Create(ConvertationModel model)
         {
-            model.Id = 0;
+            int id = 1;
 
+            if (model.Id == 0)
+            {
+                int count = _dbContext.Convertations.Count();
+
+                if (count != 0)
+                    id = _dbContext.Convertations.Max(x => x.Id);
+            }
+
+            model.Id = id + 1;
             var entity = _maper.MapModel(model);
 
             _dbContext.Convertations.Add(entity);

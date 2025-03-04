@@ -16,6 +16,7 @@ namespace SpeculatorApp.Application.ViewModels
         private readonly PairService _pairService;
 
         private PairEditViewModel? _pair;
+        private ConvertationEditViewModel? _selectedConvertation;
 
         public PairMenuViewModel(NavigationService navigation, PairService pairService)
         {
@@ -23,14 +24,24 @@ namespace SpeculatorApp.Application.ViewModels
             _pairService = pairService;
 
             NavigateToMainMenuCommand = new RelayCommand(ToMainMenu);
+            AddConvertationCommand = new RelayCommand(AddConvertation);
+            RemoveConvertationCommand = new RelayCommand(RemoveConvertation);
         }
 
         public ICommand NavigateToMainMenuCommand { get; }
+        public ICommand AddConvertationCommand { get; }
+        public ICommand RemoveConvertationCommand { get; }
 
         public PairEditViewModel? Pair
         {
             get => _pair;
             private set { _pair = value; OnPropertyChanged(); }
+        }
+
+        public ConvertationEditViewModel? SelectedConvertation
+        {
+            get => _selectedConvertation;
+            set { _selectedConvertation = value; OnPropertyChanged(); }
         }
 
         public void LoadPair(int baseCurrencyId, int tradeCurrencyId)
@@ -46,6 +57,22 @@ namespace SpeculatorApp.Application.ViewModels
             }
 
             MainMenuViewModel menu = _navigation.Navigate<MainMenuViewModel>();
+        }
+
+        public void AddConvertation(object? obj)
+        {
+            if (Pair != null)
+            {
+                _pairService.AddConvertation(Pair);
+            }
+        }
+
+        public void RemoveConvertation(object? obj)
+        {
+            if (Pair != null && SelectedConvertation != null)
+            {
+                _pairService.RemoveConvertation(Pair, SelectedConvertation);
+            }
         }
     }
 }

@@ -7,27 +7,36 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.Resources>
-            <local:BindingProxy x:Key="types" Data="{Binding OperationTypes}"/>
-        </Grid.Resources>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="0">
-            <Button Content="Go to Main Menu" Width="100" Height="21" Margin="10" 
+        <ToolBar Grid.Row="0">
+            <Button Content="Go to Main Menu" Width="100" Height="21"  
                     HorizontalAlignment="Left" Command="{Binding NavigateToMainMenuCommand}"/>
 
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <TextBlock Text="Base" FontSize="16" FontWeight="Bold"/>
-                <TextBlock Text="/" FontSize="16"/>
-                <TextBlock Text="Trade" FontSize="16" FontWeight="Bold"/>
-            </StackPanel>
+            <Separator />
+
+            <Button Content="Add Convertation" Width="120" Height="21"
+                        Command="{Binding AddConvertationCommand}"/>
+
+            <Button Content="Remove Convertation" Width="120" Height="21"
+                        Command="{Binding RemoveConvertationCommand}"/>
+
+        </ToolBar>
+
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
+            <TextBlock Text="{Binding Pair.BaseCurrency.Code}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Text="/" FontSize="16"/>
+            <TextBlock Text="{Binding Pair.TradeCurrency.Code}" FontSize="16" FontWeight="Bold"/>
         </StackPanel>
 
-        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1" Margin="10">
-            <DataGrid ItemsSource="{Binding Pair.Convertations}" AutoGenerateColumns="False">
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="2" Margin="10">
+            <DataGrid ItemsSource="{Binding Pair.Convertations}" SelectedItem="{Binding SelectedConvertation}" 
+                      AutoGenerateColumns="False">
+                
                 <DataGrid.Resources>
                     <DataTemplate x:Key="DateTemplate">
                         <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat=dd.MM.yyyy}" />

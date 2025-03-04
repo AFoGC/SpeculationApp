@@ -57,6 +57,33 @@ namespace SpeculatorApp.Application.Services
             }
         }
 
+        public void AddConvertation(PairEditViewModel viewModel)
+        {
+            ConvertationModel convertation = new ConvertationModel()
+            {
+                Id = 0,
+                BaseCurrencyId = viewModel.BaseCurrency.Id,
+                TradeCurrencyId = viewModel.TradeCurrency.Id,
+                BaseCurrencyAmount = 0,
+                TradeCurrencyAmount = 0,
+                Date = DateTime.Now
+            };
+
+            _unitOfWork.Convertations.Create(convertation);
+            _unitOfWork.Complete();
+
+            var operationViewModel = _factory.CreateConvertation(convertation);
+            viewModel.Convertations.Add(operationViewModel);
+        }
+
+        public void RemoveConvertation(PairEditViewModel pair, ConvertationEditViewModel convertation)
+        {
+            _unitOfWork.Convertations.Delete(convertation.Id);
+            _unitOfWork.Complete();
+
+            pair.Convertations.Remove(convertation);
+        }
+
         private void UpdateViewModels(PairEditViewModel viewModel)
         {
             viewModel.BaseCurrency.RefreshData();
