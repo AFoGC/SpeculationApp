@@ -4,10 +4,12 @@ using SpeculationApp.Domain.Repositories;
 using SpeculationApp.Infrastructure.Context;
 using SpeculationApp.Infrastructure.Repositories;
 using SpeculationApp.Wpf.Windows;
+using SpeculationApp.Wpf.WindowsService;
 using SpeculatorApp.Application.Factories;
 using SpeculatorApp.Application.Services;
 using SpeculatorApp.Application.Stores;
 using SpeculatorApp.Application.ViewModels;
+using SpeculatorApp.Application.WindowServices;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -52,7 +54,9 @@ namespace SpeculationApp.Wpf
             MenuStore menuStore = new MenuStore();
             NavigationService navigationService = new NavigationService(menuStore);
 
-            MainMenuViewModel mainMenu = new MainMenuViewModel(navigationService, mainMenuService);
+            IAddPairWindowService addPairService = new AddPairWindowService(store);
+
+            MainMenuViewModel mainMenu = new MainMenuViewModel(navigationService, mainMenuService, addPairService);
             navigationService.AddMenu(mainMenu);
 
             CurrencyMenuViewModel currencyMenu = new CurrencyMenuViewModel(navigationService, currencyService);

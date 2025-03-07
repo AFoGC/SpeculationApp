@@ -1,6 +1,8 @@
-﻿using SpeculatorApp.Application.Commands;
+﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Commands;
 using SpeculatorApp.Application.Services;
 using SpeculatorApp.Application.ViewModels.EditViewModels;
+using SpeculatorApp.Application.WindowServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,18 +17,24 @@ namespace SpeculatorApp.Application.ViewModels
     {
         private readonly NavigationService _navigation;
         private readonly MainMenuService _menuService;
+        private readonly IAddPairWindowService _addPairService;
 
-        public MainMenuViewModel(NavigationService navigation, MainMenuService menuService)
+        public MainMenuViewModel(NavigationService navigation, MainMenuService menuService, IAddPairWindowService addPairService)
         {
             _navigation = navigation;
             _menuService = menuService;
+            _addPairService = addPairService;
 
             NavigateToCurrencyCommand = new RelayCommand(NavigateToCurrency);
             NavigateToPairCommand = new RelayCommand(NavigateToPair);
+            AddPairCommand = new RelayCommand(CreatePair);
+            AddCurrencyCommand = new RelayCommand(CreateCurrency);
         }
 
         public ICommand NavigateToCurrencyCommand { get; }
         public ICommand NavigateToPairCommand { get; }
+        public ICommand AddPairCommand { get; }
+        public ICommand AddCurrencyCommand { get; }
 
         public ObservableCollection<CurrencyReadViewModel> Currencies => _menuService.Currencies;
         public ObservableCollection<PairReadViewModel> Pairs => _menuService.Pairs;
@@ -64,6 +72,19 @@ namespace SpeculatorApp.Application.ViewModels
             _navigation
                 .Navigate<PairMenuViewModel>()
                 .LoadPair(pair.BaseCurrencyId, pair.TradeCurrencyId);
+        }
+
+        public void CreateCurrency(object? obj)
+        {
+            _menuService.CreateCurrency();
+        }
+
+        public void CreatePair(object? obj)
+        {
+            PairCreationInfo? pair = _addPairService.GetInfo();
+
+            if (pair != null)
+                _menuService.CreatePair(pair.BaseCurrency, pair.TradeCurrency);
         }
     }
 }

@@ -53,5 +53,39 @@ namespace SpeculatorApp.Application.Services
                 _tablesStore.OperationTypes.Add(_factory.CreateOperationType(operationType));
             }
         }
+
+        public void CreateCurrency()
+        {
+            CurrencyModel model = new CurrencyModel()
+            {
+                Id = 0,
+                Code = "NC",
+                Name = "New Currency"
+            };
+
+            _unitOfWork.Currencies.Create(model);
+            _unitOfWork.Complete();
+
+            _tablesStore.Currencies.Add(_factory.CreateCurrency(model));
+        }
+
+        public void CreatePair(int baseCurrencyId, int tradeCurrencyId)
+        {
+            bool pairNotCreated = _tablesStore.Pairs.All(x => x.IsEquivalentPair(baseCurrencyId, tradeCurrencyId) == false);
+
+            if (pairNotCreated)
+            {
+                PairModel pairModel = new PairModel()
+                {
+                    BaseCurrencyId = baseCurrencyId,
+                    TradeCurrencyId = tradeCurrencyId
+                };
+
+                _unitOfWork.Pairs.Create(pairModel);
+                _unitOfWork.Complete();
+
+                _tablesStore.Pairs.Add(_factory.CreatePair(pairModel));
+            }
+        }
     }
 }

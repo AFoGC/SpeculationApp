@@ -42,5 +42,10 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             _model = _unitOfWork.Currencies.GetById(_model.Id);
             OnPropertyChanged(string.Empty);
         }
+
+        public override string ToString()
+        {
+            return Code;
+        }
     }
 }

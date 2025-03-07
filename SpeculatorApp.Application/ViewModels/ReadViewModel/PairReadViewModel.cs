@@ -37,5 +37,13 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
 
         public CurrencyReadViewModel BaseCurrency => _baseCurrency;
         public CurrencyReadViewModel TradeCurrency => _tradeCurrency;
+
+        public bool IsEquivalentPair(int baseCurrencyId, int tradeCurrencyId)
+        {
+            bool a = _model.BaseCurrencyId == baseCurrencyId && _model.TradeCurrencyId == tradeCurrencyId;
+            bool b = _model.TradeCurrencyId == baseCurrencyId && _model.BaseCurrencyId == tradeCurrencyId;
+
+            return a || b;
+        }
     }
 }
