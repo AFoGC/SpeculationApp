@@ -39,26 +39,12 @@ namespace SpeculatorApp.Application.Services
         public void UpdateCurrency(CurrencyEditViewModel viewModel)
         {
             CurrencyModel currency = viewModel.GetModel();
-            IEnumerable<OperationModel> operations = viewModel.Operations
-                .Where(x => x.IsChanged)
-                .Select(x => x.GetModel());
-
-            bool isChanged = viewModel.IsChanged || operations.Count() > 0;
 
             if (viewModel.IsChanged)
             {
                 _unitOfWork.Currencies.Update(currency);
-            }
-            
-            foreach (var operation in operations)
-            {
-                _unitOfWork.Operations.Update(operation);
-            }
-
-            if (isChanged)
-            {
                 _unitOfWork.Complete();
-                UpdateViewModels(viewModel);
+                _tablesStore.RefreshCurrency(currency.Id);
             }
         }
 
@@ -88,12 +74,6 @@ namespace SpeculatorApp.Application.Services
             _unitOfWork.Complete();
 
             currency.Operations.Remove(operation);
-        }
-
-        private void UpdateViewModels(CurrencyEditViewModel viewModel)
-        {
-            var currency = _tablesStore.Currencies.Single(x => x.Id == viewModel.Id);
-            currency.RefreshData();
         }
     }
 }

@@ -27,11 +27,13 @@ namespace SpeculatorApp.Application.ViewModels
             NavigateToMainMenuCommand = new RelayCommand(ToMainMenu);
             AddOperationCommand = new RelayCommand(AddOperation);
             RemoveOperationCommand = new RelayCommand(RemoveOperation);
+            EditOperationCommand = new RelayCommand(EditOperation);
         }
 
         public ICommand NavigateToMainMenuCommand { get; }
         public ICommand AddOperationCommand { get; }
         public ICommand RemoveOperationCommand { get; }
+        public ICommand EditOperationCommand { get; }
 
         public CurrencyEditViewModel? Currency
         {
@@ -73,6 +75,17 @@ namespace SpeculatorApp.Application.ViewModels
             if (Currency != null && SelectedOperation != null)
             {
                 _currencyService.RemoveOperation(Currency, SelectedOperation);
+            }
+        }
+
+        public void EditOperation(object? obj)
+        {
+            if (Currency != null && SelectedOperation != null)
+            {
+                var menu = _navigation.Navigate<OperationMenuViewModel>();
+
+                menu.Currency = Currency;
+                menu.Operation = SelectedOperation;
             }
         }
     }

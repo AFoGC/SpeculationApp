@@ -20,5 +20,17 @@ namespace SpeculatorApp.Application.Stores
             Pairs = new ObservableCollection<PairReadViewModel>();
             OperationTypes = new ObservableCollection<OperationTypeReadViewModel>();
         }
+
+        public void RefreshCurrency(int currencyId)
+        {
+            Currencies.Single(x => x.Id == currencyId).RefreshData();
+        }
+
+        /*
+        public void RefreshPair(int baseCurrencyId, int tradeCurrencyId)
+        {
+            Pairs.Single(x => x.BaseCurrencyId == baseCurrencyId && x.TradeCurrencyId == tradeCurrencyId);
+        }
+        */
     }
 }

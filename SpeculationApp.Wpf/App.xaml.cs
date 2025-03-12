@@ -65,6 +65,9 @@ namespace SpeculationApp.Wpf
             PairMenuViewModel pairMenu = new PairMenuViewModel(navigationService, pairService);
             navigationService.AddMenu(pairMenu);
 
+            OperationMenuViewModel operationMenu = new OperationMenuViewModel(navigationService, store, unitOfWork);
+            navigationService.AddMenu(operationMenu);
+
             MainViewModel mainViewModel = new MainViewModel(menuStore);
 
             MainWindow = new MainWindow()

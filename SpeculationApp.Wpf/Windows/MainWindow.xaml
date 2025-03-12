@@ -20,6 +20,9 @@
                 <DataTemplate DataType="{x:Type viewModels:CurrencyMenuViewModel}">
                     <views:CurrencyMenuView />
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:OperationMenuViewModel}">
+                    <views:OperationMenuViewModel />
+                </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
     </Grid>
