@@ -54,11 +54,7 @@ namespace SpeculatorApp.Application.ViewModels
 
         public void ToMainMenu(object? obj)
         {
-            if (Currency != null)
-            {
-                _currencyService.UpdateCurrency(Currency);
-            }
-
+            Currency?.Update();
             _navigation.Navigate<MainMenuViewModel>();
         }
 

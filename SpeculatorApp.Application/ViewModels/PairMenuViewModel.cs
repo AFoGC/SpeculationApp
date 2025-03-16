@@ -51,12 +51,8 @@ namespace SpeculatorApp.Application.ViewModels
 
         public void ToMainMenu(object? obj)
         {
-            if (Pair != null)
-            {
-                _pairService.UpdatePair(Pair);
-            }
-
-            MainMenuViewModel menu = _navigation.Navigate<MainMenuViewModel>();
+            //Pair?.Update();
+            _navigation.Navigate<MainMenuViewModel>();
         }
 
         public void AddConvertation(object? obj)

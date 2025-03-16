@@ -36,18 +36,6 @@ namespace SpeculatorApp.Application.Services
             return _factory.CreateCurrency(model, operations);
         }
 
-        public void UpdateCurrency(CurrencyEditViewModel viewModel)
-        {
-            CurrencyModel currency = viewModel.GetModel();
-
-            if (viewModel.IsChanged)
-            {
-                _unitOfWork.Currencies.Update(currency);
-                _unitOfWork.Complete();
-                _tablesStore.RefreshCurrency(currency.Id);
-            }
-        }
-
         public void AddOperation(CurrencyEditViewModel viewModel)
         {
             int operationTypeId = _tablesStore.OperationTypes.First().Id;

@@ -37,26 +37,6 @@ namespace SpeculatorApp.Application.Services
             return _factory.CreatePair(baseCurrency, tradeCurrency, convertations);
         }
 
-        public void UpdatePair(PairEditViewModel viewModel)
-        {
-            IEnumerable<ConvertationModel> convertations = viewModel.Convertations
-                .Where(x => x.IsChanged)
-                .Select(x => x.GetModel());
-
-            bool isChanged = viewModel.IsChanged || convertations.Count() > 0;
-
-            foreach (var convertation in convertations)
-            {
-                _unitOfWork.Convertations.Update(convertation);
-            }
-
-            if (isChanged)
-            {
-                _unitOfWork.Complete();
-                UpdateViewModels(viewModel);
-            }
-        }
-
         public void AddConvertation(PairEditViewModel viewModel)
         {
             ConvertationModel convertation = new ConvertationModel()
@@ -82,12 +62,6 @@ namespace SpeculatorApp.Application.Services
             _unitOfWork.Complete();
 
             pair.Convertations.Remove(convertation);
-        }
-
-        private void UpdateViewModels(PairEditViewModel viewModel)
-        {
-            viewModel.BaseCurrency.RefreshData();
-            viewModel.TradeCurrency.RefreshData();
         }
     }
 }

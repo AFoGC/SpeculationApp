@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Services.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,25 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
     public class ConvertationEditViewModel : ViewModel
     {
         private readonly ConvertationModel _model;
+        private readonly ConvertationUpdateService _updateService;
+
         private bool _isChanged;
 
-        public ConvertationEditViewModel(ConvertationModel model)
+        public ConvertationEditViewModel(ConvertationModel model, ConvertationUpdateService updateService)
         {
             _model = model;
+            _updateService = updateService;
         }
 
-        public bool IsChanged => _isChanged;
+        public bool IsChanged
+        {
+            get => _isChanged;
+            private set
+            { 
+                _isChanged = value; 
+                OnPropertyChanged();
+            }
+        }
 
         public int Id => _model.Id;
         public int BaseCurrencyId => _model.BaseCurrencyId;
@@ -67,9 +79,13 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             }
         }
 
-        public ConvertationModel GetModel()
+        public void Update()
         {
-            return _model;
+            if (IsChanged)
+            {
+                _updateService.Update(_model);
+                IsChanged = false;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SpeculationApp.Domain.Entities;
 using SpeculationApp.Domain.Repositories;
+using SpeculatorApp.Application.Services.Update;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,18 +13,28 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
     public class CurrencyEditViewModel : ViewModel
     {
         private readonly ObservableCollection<OperationEditViewModel> _operations;
+        private readonly CurrencyUpdateService _updateService;
 
         private CurrencyModel _model;
         private bool _isChanged;
 
-        public CurrencyEditViewModel(CurrencyModel model, IEnumerable<OperationEditViewModel> operations)
+        public CurrencyEditViewModel(CurrencyModel model, IEnumerable<OperationEditViewModel> operations, CurrencyUpdateService updateService)
         {
             _operations = new ObservableCollection<OperationEditViewModel>(operations);
+            _updateService = updateService;
 
             _model = model;
         }
 
-        public bool IsChanged => _isChanged;
+        public bool IsChanged
+        {
+            get => _isChanged;
+            set
+            {
+                _isChanged = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int Id => _model.Id;
         public string Code
@@ -51,9 +62,13 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
 
         public ObservableCollection<OperationEditViewModel> Operations => _operations;
 
-        public CurrencyModel GetModel()
+        public void Update()
         {
-            return _model;
+            if (IsChanged)
+            {
+                _updateService.Update(_model);
+                IsChanged = false;
+            }
         }
     }
 }

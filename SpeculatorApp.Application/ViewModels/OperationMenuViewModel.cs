@@ -16,23 +16,14 @@ namespace SpeculatorApp.Application.ViewModels
     {
         private readonly ReadTablesStore _tablesStore;
         private readonly NavigationService _navigation;
-        private readonly IUnitOfWork _unitOfWork;
 
         private OperationEditViewModel? _operation;
         private CurrencyEditViewModel? _currency;
 
-        private bool _isChanged;
-        private int? _operationId;
-        private int? _currencyId;
-        private decimal? _amount;
-        private DateTime? _date;
-        private OperationTypeReadViewModel? _operationType;
-
-        public OperationMenuViewModel(NavigationService navigation, ReadTablesStore tablesStore, IUnitOfWork unitOfWork)
+        public OperationMenuViewModel(NavigationService navigation, ReadTablesStore tablesStore)
         {
             _navigation = navigation;
             _tablesStore = tablesStore;
-            _unitOfWork = unitOfWork;
 
             GoBackCommand = new RelayCommand(GoBack);
             UpdateOperationCommand = new RelayCommand(UpdateOperation);
@@ -52,80 +43,7 @@ namespace SpeculatorApp.Application.ViewModels
         public OperationEditViewModel? Operation
         {
             get => _operation;
-            set
-            { 
-                _operation = value;
-
-                IsChanged = false;
-                OperationId = _operation?.Id;
-                CurrencyId = _operation?.CurrencyId;
-                Amount = _operation?.Amount;
-                Date = _operation?.Date;
-                OperationType = _operation?.OperationType;
-
-                OnPropertyChanged(); 
-            }
-        }
-
-        public bool IsChanged
-        {
-            get => _isChanged;
-            private set
-            {
-                _isChanged = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int? OperationId
-        {
-            get => _operationId;
-            private set
-            {
-                _operationId = value;
-                OnPropertyChanged();
-                IsChanged = true;
-            }
-        }
-        public int? CurrencyId
-        {
-            get => _currencyId;
-            private set
-            {
-                _currencyId = value;
-                OnPropertyChanged();
-                IsChanged = true;
-            }
-        }
-        public decimal? Amount
-        {
-            get => _amount;
-            set
-            {
-                _amount = value;
-                OnPropertyChanged();
-                IsChanged = true;
-            }
-        }
-        public DateTime? Date
-        {
-            get => _date;
-            set
-            {
-                _date = value;
-                OnPropertyChanged();
-                IsChanged = true;
-            }
-        }
-        public OperationTypeReadViewModel? OperationType
-        {
-            get => _operationType;
-            set
-            {
-                _operationType = value;
-                OnPropertyChanged();
-                IsChanged = true;
-            }
+            set { _operation = value; OnPropertyChanged(); }
         }
 
         public void GoBack(object? obj)
@@ -135,25 +53,7 @@ namespace SpeculatorApp.Application.ViewModels
 
         public void UpdateOperation(object? obj)
         {
-            if (OperationType == null || Amount == null || Date == null || Operation == null)
-                throw new NullReferenceException();
-
-            if (IsChanged)
-            {
-                if (Operation.OperationType != OperationType)
-                    Operation.OperationType = OperationType;
-
-                if (Operation.Amount != Amount)
-                    Operation.Amount = (decimal)Amount;
-
-                if (Operation.Date != Date)
-                    Operation.Date = (DateTime)Date;
-
-                var model = Operation.GetModel();
-                _unitOfWork.Operations.Update(model);
-                _tablesStore.RefreshCurrency(model.CurrencyId);
-            }
-
+            Operation?.Update();
             _navigation.Navigate<CurrencyMenuViewModel>();
         }
     }

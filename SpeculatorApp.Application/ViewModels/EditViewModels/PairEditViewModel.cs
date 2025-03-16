@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Services.Update;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,16 +12,18 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
     public class PairEditViewModel : ViewModel
     {
         private readonly ObservableCollection<ConvertationEditViewModel> _convertations;
+        private readonly PairUpdateService _updateService;
 
         private bool _isChanged;
 
         public PairEditViewModel(CurrencyReadViewModel baseCurrency, CurrencyReadViewModel tradeCurrency, 
-            IEnumerable<ConvertationEditViewModel> convertations)
+            IEnumerable<ConvertationEditViewModel> convertations, PairUpdateService updateService)
         {
             BaseCurrency = baseCurrency;
             TradeCurrency = tradeCurrency;
 
             _convertations = new ObservableCollection<ConvertationEditViewModel>(convertations);
+            _updateService = updateService;
             _isChanged = false;
         }
 

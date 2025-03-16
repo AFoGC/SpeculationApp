@@ -58,14 +58,14 @@
             <TextBlock Grid.Row="3" Text="Operation Type: " />
             <TextBlock Grid.Row="4" Text="Date: "/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=OperationId, Mode=OneWay}" IsReadOnly="True" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=CurrencyId, Mode=OneWay}" IsReadOnly="True" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Amount}" />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Operation.Id, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Operation.CurrencyId, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Operation.Amount}" />
 
-            <ComboBox ItemsSource="{Binding OperationTypes}" SelectedItem="{Binding OperationType}"
+            <ComboBox ItemsSource="{Binding OperationTypes}" SelectedItem="{Binding Operation.OperationType}"
                       Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Width="250"/>
 
-            <DatePicker SelectedDate="{Binding Date}" FontSize="18" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Width="250"/>
+            <DatePicker SelectedDate="{Binding Operation.Date}" FontSize="18" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Width="250"/>
         </Grid>
     </Grid>
 </UserControl>

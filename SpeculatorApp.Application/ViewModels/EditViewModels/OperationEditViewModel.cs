@@ -1,4 +1,5 @@
 ﻿using SpeculationApp.Domain.Entities;
+using SpeculatorApp.Application.Services.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,31 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
 {
     public class OperationEditViewModel : ViewModel
     {
+        private readonly OperationUpdateService _updateService;
+
         private OperationModel _model;
         private bool _isChanged;
 
         private OperationTypeReadViewModel _operationType;
 
-        public OperationEditViewModel(OperationModel model, IEnumerable<OperationTypeReadViewModel> operationTypes)
+        public OperationEditViewModel(OperationModel model, IEnumerable<OperationTypeReadViewModel> operationTypes, OperationUpdateService updateService)
         {
             _model = model;
+            _updateService = updateService;
 
             var type = operationTypes.Single(x => x.Id == _model.OperationTypeId);
             _operationType = type;
         }
 
-        public bool IsChanged => _isChanged;
+        public bool IsChanged
+        {
+            get => _isChanged;
+            private set
+            {
+                _isChanged = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int Id => _model.Id;
         public int CurrencyId => _model.CurrencyId;
@@ -33,7 +45,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             set
             {
                 _model.Amount = value;
-                _isChanged = true;
+                IsChanged = true;
 
                 OnPropertyChanged();
             }
@@ -44,7 +56,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             set
             {
                 _model.Date = value;
-                _isChanged = true;
+                IsChanged = true;
 
                 OnPropertyChanged();
             }
@@ -57,15 +69,19 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             {
                 _operationType = value;
                 _model.OperationTypeId = value.Id;
-                _isChanged = true;
+                IsChanged = true;
 
                 OnPropertyChanged();
             }
         }
 
-        public OperationModel GetModel()
+        public void Update()
         {
-            return _model;
+            if (IsChanged)
+            {
+                _updateService.Update(_model);
+                IsChanged = false;
+            }
         }
     }
 }
