@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:SpeculationApp.Wpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
@@ -18,7 +19,18 @@
                     HorizontalAlignment="Left" Command="{Binding GoBackCommand}"/>
 
             <Button Content="Update Operation" Width="120" Height="21"  
-                    HorizontalAlignment="Left" Command="{Binding UpdateOperationCommand}"/>
+                    HorizontalAlignment="Left" Command="{Binding UpdateOperationCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Operation.IsChanged}" Value="True">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </ToolBar>
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">

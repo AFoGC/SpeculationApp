@@ -22,15 +22,36 @@
             
             <Separator />
 
+            <Button Content="Edit Operation" Width="120" Height="21"
+                    Command="{Binding EditOperationCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedOperation}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
             <Button Content="Add Operation" Width="120" Height="21"
                     Command="{Binding AddOperationCommand}"/>
-            
+
             <Button Content="Remove Operation" Width="120" Height="21"
-                    Command="{Binding RemoveOperationCommand}"/>
-
-            <Button Content="Edit Operation" Width="120" Height="21"
-                    Command="{Binding EditOperationCommand}"/>
-
+                    Command="{Binding RemoveOperationCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedOperation}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </ToolBar>
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
