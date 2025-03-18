@@ -70,5 +70,16 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
                 IsChanged = false;
             }
         }
+
+        public void RestoreModel()
+        {
+            if (IsChanged)
+            {
+                _model = _updateService.RestoreModel(_model);
+                _isChanged = false;
+
+                OnPropertyChanged(String.Empty);
+            }
+        }
     }
 }

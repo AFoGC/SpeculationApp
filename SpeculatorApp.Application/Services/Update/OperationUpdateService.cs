@@ -27,5 +27,10 @@ namespace SpeculatorApp.Application.Services.Update
                 .Single(x => x.Id == model.CurrencyId)
                 .RefreshData();
         }
+
+        public OperationModel RestoreModel(OperationModel model)
+        {
+            return _unitOfWork.Operations.GetById(model.Id);
+        }
     }
 }

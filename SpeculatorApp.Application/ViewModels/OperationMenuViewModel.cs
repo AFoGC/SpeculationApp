@@ -49,6 +49,7 @@ namespace SpeculatorApp.Application.ViewModels
         public void GoBack(object? obj)
         {
             _navigation.Navigate<CurrencyMenuViewModel>();
+            Operation?.RestoreModel();
         }
 
         public void UpdateOperation(object? obj)

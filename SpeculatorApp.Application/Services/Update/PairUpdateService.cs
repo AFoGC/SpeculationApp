@@ -1,4 +1,5 @@
-﻿using SpeculationApp.Domain.Repositories;
+﻿using SpeculationApp.Domain.Entities;
+using SpeculationApp.Domain.Repositories;
 using SpeculatorApp.Application.Stores;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,16 @@ namespace SpeculatorApp.Application.Services.Update
         {
             _unitOfWork = unitOfWork;
             _tablesStore = tablesStore;
+        }
+
+        public void Update(PairModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PairModel RestoreModel(PairModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

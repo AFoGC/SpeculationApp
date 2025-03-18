@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0">
-            <Button Content="Go to Main Menu" Width="120" Height="21"  
+            <Button Content="Go to Currency Menu" Width="120" Height="21"  
                     HorizontalAlignment="Left" Command="{Binding GoBackCommand}"/>
 
             <Button Content="Update Operation" Width="120" Height="21"  

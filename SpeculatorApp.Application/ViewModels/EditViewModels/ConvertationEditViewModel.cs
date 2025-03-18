@@ -10,7 +10,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
 {
     public class ConvertationEditViewModel : ViewModel
     {
-        private readonly ConvertationModel _model;
+        private ConvertationModel _model;
         private readonly ConvertationUpdateService _updateService;
 
         private bool _isChanged;
@@ -85,6 +85,17 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             {
                 _updateService.Update(_model);
                 IsChanged = false;
+            }
+        }
+
+        public void RestoreModel()
+        {
+            if (IsChanged)
+            {
+                _model = _updateService.RestoreModel(_model);
+                _isChanged = false;
+
+                OnPropertyChanged(String.Empty);
             }
         }
     }
