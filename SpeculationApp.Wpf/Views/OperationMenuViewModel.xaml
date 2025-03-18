@@ -16,10 +16,10 @@
 
         <ToolBar Grid.Row="0">
             <Button Content="Go to Currency Menu" Width="120" Height="21"  
-                    HorizontalAlignment="Left" Command="{Binding GoBackCommand}"/>
+                    HorizontalAlignment="Left" Command="{Binding GoBackCommand}" MouseEnter="Button_MouseEnter"/>
 
             <Button Content="Update Operation" Width="120" Height="21"  
-                    HorizontalAlignment="Left" Command="{Binding UpdateOperationCommand}">
+                    HorizontalAlignment="Left" Command="{Binding UpdateOperationCommand}" MouseEnter="Button_MouseEnter">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="IsEnabled" Value="False"/>
@@ -72,12 +72,12 @@
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Operation.Id, Mode=OneWay}" IsReadOnly="True" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Operation.CurrencyId, Mode=OneWay}" IsReadOnly="True" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Operation.Amount}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Operation.Amount, UpdateSourceTrigger=LostFocus}" x:Name="AmountBox"/>
 
             <ComboBox ItemsSource="{Binding OperationTypes}" SelectedItem="{Binding Operation.OperationType}"
                       Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Width="250"/>
 
-            <DatePicker SelectedDate="{Binding Operation.Date}" FontSize="18" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Width="250"/>
+            <DatePicker SelectedDate="{Binding Operation.Date}" FontSize="18" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Width="250" x:Name="DateBox"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -24,5 +24,16 @@ namespace SpeculationApp.Wpf.Views
         {
             InitializeComponent();
         }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            BindingExpression be;
+
+            be = AmountBox.GetBindingExpression(TextBox.TextProperty);
+            be.UpdateSource();
+
+            be = DateBox.GetBindingExpression(DatePicker.TextProperty);
+            be.UpdateSource();
+        }
     }
 }

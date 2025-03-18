@@ -44,10 +44,13 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             get => _model.Amount;
             set
             {
-                _model.Amount = value;
-                IsChanged = true;
+                if (_model.Amount != value)
+                {
+                    _model.Amount = value;
+                    IsChanged = true;
 
-                OnPropertyChanged();
+                    OnPropertyChanged();
+                }
             }
         }
         public DateTime Date
