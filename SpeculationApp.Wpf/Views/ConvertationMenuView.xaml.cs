@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SpeculationApp.Wpf.Views
 {
     /// <summary>
-    /// Логика взаимодействия для OperationMenuViewModel.xaml
+    /// Логика взаимодействия для ConvertationMenuView.xaml
     /// </summary>
-    public partial class OperationMenuViewModel : UserControl
+    public partial class ConvertationMenuView : UserControl
     {
-        public OperationMenuViewModel()
+        public ConvertationMenuView()
         {
             InitializeComponent();
         }
@@ -29,10 +29,13 @@ namespace SpeculationApp.Wpf.Views
         {
             BindingExpression be;
 
-            be = AmountBox.GetBindingExpression(TextBox.TextProperty);
+            be = BaseAmountBox.GetBindingExpression(TextBox.TextProperty);
             be.UpdateSource();
 
-            be = DateBox.GetBindingExpression(DatePicker.TextProperty);
+            be = TradeAmountBox.GetBindingExpression(TextBox.TextProperty);
+            be.UpdateSource();
+
+            be = DateBox.GetBindingExpression(DatePicker.SelectedDateProperty);
             be.UpdateSource();
         }
     }

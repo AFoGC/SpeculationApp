@@ -21,7 +21,10 @@
                     <views:CurrencyMenuView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewModels:OperationMenuViewModel}">
-                    <views:OperationMenuViewModel />
+                    <views:OperationMenuView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ConvertationMenuViewModel}">
+                    <views:ConvertationMenuView />
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

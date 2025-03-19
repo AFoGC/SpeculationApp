@@ -68,6 +68,9 @@ namespace SpeculationApp.Wpf
             OperationMenuViewModel operationMenu = new OperationMenuViewModel(navigationService, store);
             navigationService.AddMenu(operationMenu);
 
+            ConvertationMenuViewModel convertationMenu = new ConvertationMenuViewModel(navigationService);
+            navigationService.AddMenu(convertationMenu);
+
             MainViewModel mainViewModel = new MainViewModel(menuStore);
 
             MainWindow = new MainWindow()

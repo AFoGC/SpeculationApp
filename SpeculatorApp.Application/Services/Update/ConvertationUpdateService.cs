@@ -23,6 +23,7 @@ namespace SpeculatorApp.Application.Services.Update
         public void Update(ConvertationModel model)
         {
             _unitOfWork.Convertations.Update(model);
+            _unitOfWork.Complete();
 
             _tablesStore.Currencies
                 .Single(x => x.Id == model.BaseCurrencyId)

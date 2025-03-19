@@ -40,7 +40,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             set
             {
                 _model.BaseCurrencyAmount = value;
-                _isChanged = true;
+                IsChanged = true;
 
                 OnPropertyChanged();
             }
@@ -51,7 +51,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             set
             {
                 _model.TradeCurrencyAmount = value;
-                _isChanged = true;
+                IsChanged = true;
 
                 OnPropertyChanged();
             }
@@ -62,7 +62,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             set
             {
                 _model.ToTradeCurrency = value;
-                _isChanged = true;
+                IsChanged = true;
 
                 OnPropertyChanged();
             }
@@ -73,7 +73,7 @@ namespace SpeculatorApp.Application.ViewModels.EditViewModels
             set
             {
                 _model.Date = value;
-                _isChanged = true;
+                IsChanged = true;
 
                 OnPropertyChanged();
             }

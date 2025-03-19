@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SpeculationApp.Wpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,11 +19,36 @@
 
             <Separator />
 
+            <Button Content="Edit Operation" Width="120" Height="21"
+                    Command="{Binding EditConvertationCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedConvertation}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
             <Button Content="Add Convertation" Width="120" Height="21"
                         Command="{Binding AddConvertationCommand}"/>
 
             <Button Content="Remove Convertation" Width="120" Height="21"
-                        Command="{Binding RemoveConvertationCommand}"/>
+                        Command="{Binding RemoveConvertationCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedConvertation}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
         </ToolBar>
 
@@ -36,21 +61,26 @@
         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="2" Margin="10">
             <DataGrid ItemsSource="{Binding Pair.Convertations}" SelectedItem="{Binding SelectedConvertation}" 
                       AutoGenerateColumns="False">
-                
-                <DataGrid.Resources>
-                    <DataTemplate x:Key="DateTemplate">
-                        <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat=dd.MM.yyyy}" />
-                    </DataTemplate>
-                    <DataTemplate x:Key="EditingDateTemplate">
-                        <DatePicker SelectedDate="{Binding Path=Date, UpdateSourceTrigger=LostFocus}" />
-                    </DataTemplate>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Base Currency Amount" Width="150" Binding="{Binding Path=BaseCurrencyAmount, UpdateSourceTrigger=LostFocus}" />
-                    <DataGridCheckBoxColumn Header="To Trade Currency" Width="150" Binding="{Binding Path=ToTradeCurrency, UpdateSourceTrigger=PropertyChanged}" />
-                    <DataGridTextColumn Header="Trade Currency Amount" Width="150" Binding="{Binding Path=TradeCurrencyAmount, UpdateSourceTrigger=LostFocus}" />
+                    <DataGridTextColumn Header="Base Currency Amount" Width="150" Binding="{Binding Path=BaseCurrencyAmount}" IsReadOnly="True"/>
+                    
+                    <DataGridTextColumn Header="Flow" Width="50" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="Text" Value="&lt;-" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=ToTradeCurrency}" Value="True">
+                                        <Setter Property="Text" Value="->"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                    <DataGridTemplateColumn Header="Date" Width="150" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}"/>
+
+                    <DataGridTextColumn Header="Trade Currency Amount" Width="150" Binding="{Binding Path=TradeCurrencyAmount}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Date" Width="150" Binding="{Binding Path=Date, StringFormat=dd.MM.yyyy}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

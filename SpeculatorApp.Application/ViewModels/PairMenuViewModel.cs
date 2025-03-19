@@ -26,11 +26,13 @@ namespace SpeculatorApp.Application.ViewModels
             NavigateToMainMenuCommand = new RelayCommand(ToMainMenu);
             AddConvertationCommand = new RelayCommand(AddConvertation);
             RemoveConvertationCommand = new RelayCommand(RemoveConvertation);
+            EditConvertationCommand = new RelayCommand(EditConvertation);
         }
 
         public ICommand NavigateToMainMenuCommand { get; }
         public ICommand AddConvertationCommand { get; }
         public ICommand RemoveConvertationCommand { get; }
+        public ICommand EditConvertationCommand { get; }
 
         public PairEditViewModel? Pair
         {
@@ -52,6 +54,10 @@ namespace SpeculatorApp.Application.ViewModels
         public void ToMainMenu(object? obj)
         {
             //Pair?.Update();
+
+            Pair = null;
+            SelectedConvertation = null;
+
             _navigation.Navigate<MainMenuViewModel>();
         }
 
@@ -68,6 +74,17 @@ namespace SpeculatorApp.Application.ViewModels
             if (Pair != null && SelectedConvertation != null)
             {
                 _pairService.RemoveConvertation(Pair, SelectedConvertation);
+            }
+        }
+
+        public void EditConvertation(object? obj)
+        {
+            if (Pair != null && SelectedConvertation != null)
+            {
+                var menu = _navigation.Navigate<ConvertationMenuViewModel>();
+
+                menu.Pair = Pair;
+                menu.Convertation = SelectedConvertation;
             }
         }
     }
