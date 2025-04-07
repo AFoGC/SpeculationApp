@@ -14,7 +14,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -33,7 +35,7 @@ namespace SpeculationApp.Wpf
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            string connectionString = "Datasource=C:\\Users\\sirko\\source\\repos\\SpeculationApp\\SpeculationApp.Wpf\\bin\\Debug\\net7.0-windows\\Films.db";
+            string connectionString = "Datasource=" + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)! + "\\Films.db";
             SqliteConnection connection = new SqliteConnection(connectionString);
 
             DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
